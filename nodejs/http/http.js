@@ -40,6 +40,8 @@ exports.get = function(options, cb) {
 exports._connectionListener = server._connectionListener;
 const Server = exports.Server = server.Server;
 
+//暴露createServer接口,生成的是Server对象,这个对象来自'_http_server'模块
+//requestListener监听器
 exports.createServer = function(requestListener) {
   return new Server(requestListener);
 };
