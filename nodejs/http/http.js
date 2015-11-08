@@ -4,28 +4,28 @@ const util = require('util');
 const internalUtil = require('internal/util');
 const EventEmitter = require('events');
 
-
+//IncomingMessage是请求Message的封装,对应request
 exports.IncomingMessage = require('_http_incoming').IncomingMessage;
 
 
 const common = require('_http_common');
 exports.METHODS = common.methods.slice().sort();
 
-
+//OutgoingMessage是响应Message的封装,对应Response
 exports.OutgoingMessage = require('_http_outgoing').OutgoingMessage;
 
 
 const server = require('_http_server');
-exports.ServerResponse = server.ServerResponse;
+exports.ServerResponse = server.ServerResponse;//这个Response就是我们得到的那个Response
 exports.STATUS_CODES = server.STATUS_CODES;
 
 
 const agent = require('_http_agent');
-const Agent = exports.Agent = agent.Agent;
-exports.globalAgent = agent.globalAgent;
+const Agent = exports.Agent = agent.Agent;//用于把套接字做成资源池，用于HTTP客户端请求
+exports.globalAgent = agent.globalAgent;//超全局的代理实例，是http客户端的默认请求
 
 const client = require('_http_client');
-const ClientRequest = exports.ClientRequest = client.ClientRequest;
+const ClientRequest = exports.ClientRequest = client.ClientRequest;//表示nodejs发送http请求的封装
 
 exports.request = function(options, cb) {
   return new ClientRequest(options, cb);
@@ -40,15 +40,14 @@ exports.get = function(options, cb) {
 exports._connectionListener = server._connectionListener;
 const Server = exports.Server = server.Server;
 
-//��¶createServer�ӿ�,���ɵ���Server����,�����������'_http_server'ģ��
-//requestListener������
+//生成http服务器
 exports.createServer = function(requestListener) {
   return new Server(requestListener);
 };
 
 
 // Legacy Interface
-
+//遗留的接口
 function Client(port, host) {
   if (!(this instanceof Client)) return new Client(port, host);
   EventEmitter.call(this);
@@ -93,7 +92,7 @@ Client.prototype.request = function(method, path, headers) {
   });
   return c;
 };
-
+//下面的已经抛弃
 exports.Client = internalUtil.deprecate(Client, 'http.Client is deprecated.');
 
 exports.createClient = internalUtil.deprecate(function(port, host) {
