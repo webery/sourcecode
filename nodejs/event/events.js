@@ -2,12 +2,13 @@
 
 
 /**
-events 模块值有EventEmitter这个对象.
-一般通过继承EventEmitter,实现自定义对象具有注册和触发事件的功能
+只有EventEmitter这个函数对象
+一般通过继承EventEmitter,
+实现自定义对象具有注册和触发事件的功能
 **/
 
 
-var domain;
+var domain;//异步异常相关
 
 function EventEmitter() {
   EventEmitter.init.call(this);//初始化
@@ -20,7 +21,7 @@ EventEmitter.EventEmitter = EventEmitter;
 EventEmitter.usingDomains = false;
 
 EventEmitter.prototype.domain = undefined;
-EventEmitter.prototype._events = undefined;//事件容器(保存所有的注册事件)
+EventEmitter.prototype._events = undefined;//事件容器(保存所有的注册事件)key-value(fn|[fn1,fn2...])
 EventEmitter.prototype._maxListeners = undefined;//每种事件监听器最大注册数量
 
 // By default EventEmitters will print a warning if more than 10 listeners are
