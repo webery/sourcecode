@@ -23,7 +23,7 @@ exports.readStop = readStop;
 
 /* Abstract base class for ServerRequest and ClientResponse. */
 function IncomingMessage(socket) {
-  Stream.Readable.call(this);
+  Stream.Readable.call(this);//…Ë÷√this
 
   // XXX This implementation is kind of all over the place
   // When the parser emits body chunks, they go in this list.

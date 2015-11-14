@@ -15,7 +15,7 @@
 
 var debug = require('debug')('connect:dispatcher');
 var EventEmitter = require('events').EventEmitter;
-var finalhandler = require('finalhandler');
+var finalhandler = require('finalhandler');//Node.js function to invoke as the final step to respond to HTTP request
 var http = require('http');
 var merge = require('utils-merge');
 var parseUrl = require('parseurl');
@@ -36,6 +36,7 @@ var env = process.env.NODE_ENV || 'development';
 var proto = {};
 
 /* istanbul ignore next */
+//八卦一下process.nextTick 和setImmediate http://www.oschina.net/translate/understanding-process-next-tick?print
 var defer = typeof setImmediate === 'function'
   ? setImmediate
   : function(fn){ process.nextTick(fn.bind.apply(fn, arguments)) }
@@ -48,11 +49,11 @@ var defer = typeof setImmediate === 'function'
  */
 //对外接口,返回的是一个名为app的闭包
 function createServer() {
-  function app(req, res, next){ app.handle(req, res, next); }
-  merge(app, proto);//把proto的属性恩惠函数拷贝到app
+  function app(req, res, next){ app.handle(req, res, next); }//app最后注册为Server的request事件监听函数
+  merge(app, proto);//把proto的原型拷贝到app(相当于继承一样)
   merge(app, EventEmitter.prototype);//相当于app继承了EventEmitter
   app.route = '/';//app拦截的URL路径,'/'表示拦截所有的请求路径
-  app.stack = [];//中间件存储数组, 以layer的封装形式保存
+  app.stack = [];//中间件存储数组, 以layer的封装形式保存,后面会看到layer就是{path,handler}的结构
   return app;
 }
 
@@ -132,6 +133,7 @@ proto.handle = function handle(req, res, out) {
   var stack = this.stack;
 
   // final function handler
+  //当所有的中间件执行完成,done就被执行
   var done = out || finalhandler(req, res, {
     env: env,
     onerror: logerror
@@ -144,6 +146,7 @@ proto.handle = function handle(req, res, out) {
   //然后从layer中间件把路径和处理器拿出来,
   //然后委托call函数调用处理器.然后呢......用过express的孩子知道,我们经常会在Controller执行完成后,
   //调用next(),这样就会调用下一个中间件了
+  //next()的调用机制,有点像Java中的FilterChain或者Tomcat中的管道.
   function next(err) {
     if (slashAdded) {
       req.url = req.url.substr(1);
@@ -230,16 +233,16 @@ proto.handle = function handle(req, res, out) {
 
 proto.listen = function listen() {
 	//把app注入真正的http server对象中function app(req, res, next){ app.handle(req, res, next); }
-	//app其实就是一个回调函数,js中,类,对象,函数就是这么抓狂!
+	//app其实就是一个回调函数,函数对象就是这么抓狂!又能new对象又能做函数^_^
   var server = http.createServer(this);
-  return server.listen.apply(server, arguments);
+  return server.listen.apply(server, arguments);//arguments被最新的ES标准抛弃了...
 };
 
 /**
  * Invoke a route handle.
  * @private
  */
-
+//中间件委托的执行函数,在next()中调用. 但是不处理异常,异常通过参数返回next()
 function call(handle, route, err, req, res, next) {
   var arity = handle.length;
   var error = err;
@@ -250,20 +253,22 @@ function call(handle, route, err, req, res, next) {
   try {
     if (hasError && arity === 4) {
       // error-handling middleware
+	  //异常处理中间件
       handle(err, req, res, next);
       return;
     } else if (!hasError && arity < 4) {
       // request-handling middleware
+	  //非异常中间件
       handle(req, res, next);
       return;
     }
   } catch (e) {
     // replace the error
-    error = e;
+    error = e;//通过这里可以看到,后面的异常会覆盖前面的异常
   }
 
   // continue
-  next(error);
+  next(error);//执行下一个中间件
 }
 
 /**
@@ -272,7 +277,7 @@ function call(handle, route, err, req, res, next) {
  * @param {Error} err
  * @private
  */
-
+//打印异常日志
 function logerror(err) {
   if (env !== 'test') console.error(err.stack || err.toString());
 }
@@ -283,7 +288,7 @@ function logerror(err) {
  * @param {string} url
  * @private
  */
-//获取URL的协议和服务器域名,例如https://www.baidu.com
+//获取URL的协议和服务器域名,例如https://www.google.com
 function getProtohost(url) {
   if (url.length === 0 || url[0] === '/') {
     return undefined;

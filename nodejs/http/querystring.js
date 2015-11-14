@@ -157,7 +157,7 @@ var stringifyPrimitive = function(v) {
   return '';
 };
 
-
+//和parse作用刚好相反
 QueryString.stringify = QueryString.encode = function(obj, sep, eq, options) {
   sep = sep || '&';
   eq = eq || '=';
@@ -199,10 +199,12 @@ QueryString.stringify = QueryString.encode = function(obj, sep, eq, options) {
 };
 
 // Parse a key=val string.
+//把类似于URL,?号后面的查询字符串解析成一个对象
+//例如:?name=weber&id=007  {name:'weber', id:'007'}
 QueryString.parse = QueryString.decode = function(qs, sep, eq, options) {
   sep = sep || '&';
   eq = eq || '=';
-  var obj = {};
+  var obj = {};//保存结果
 
   if (typeof qs !== 'string' || qs.length === 0) {
     return obj;

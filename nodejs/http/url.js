@@ -1,5 +1,9 @@
 'use strict';
 
+/**
+URL函数对象
+**/
+
 const punycode = require('punycode');
 
 exports.parse = urlParse;
@@ -10,16 +14,16 @@ exports.format = urlFormat;
 exports.Url = Url;
 
 function Url() {
-  this.protocol = null;
-  this.slashes = null;
+  this.protocol = null;//协议
+  this.slashes = null;//
   this.auth = null;
-  this.host = null;
-  this.port = null;
-  this.hostname = null;
-  this.hash = null;
-  this.search = null;
-  this.query = null;
-  this.pathname = null;
+  this.host = null;//主机
+  this.port = null;//端口
+  this.hostname = null;//域名
+  this.hash = null;//frame锚点
+  this.search = null;//
+  this.query = null;//查询?
+  this.pathname = null;/
   this.path = null;
   this.href = null;
 }
