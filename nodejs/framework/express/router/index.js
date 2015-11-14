@@ -33,7 +33,7 @@ var parseUrl = require('parseurl');
  layer: 1.路由器层 每个路由层对应0个或多个Route; 2.路由层 
  A router object is an isolated instance of middleware and routes. 
   performing middleware and routing functions
- 
+ http://www.tuicool.com/articles/VrAbe2
  **/
 
 var objectRegExp = /^\[object (\S+)\]$/;
