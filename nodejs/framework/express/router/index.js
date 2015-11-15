@@ -30,9 +30,23 @@ var parseUrl = require('parseurl');
  /**
  router: 路由器 每个路由器包含多个路由层
  route: 路由 每个路由对应一个path, 多个method,也就是多个控制器
- layer: 1.路由器层 每个路由层对应0个或多个Route; 2.路由层 
+ layer: 
+   1.路由器层{path, options(sensitive,strict:false,end:false), handler, route}
+   2.路由层 {path,options(sensitive,strict:this.strict,end:true),handler,method}
  A router object is an isolated instance of middleware and routes. 
   performing middleware and routing functions
+  
+  添加路由器层
+  app.use->router.use->注入路由器层
+  创建路由层
+  app.route->router.route->
+  往route加入路由层
+  app[method]->route[method]
+  
+  1.普通中间件,也就是路由器Layer层直接封装的是处理器(使用path直接匹配到处理器)
+  2.route路由中间件,也就是路由器Layer层封装的是一个route.route封装的也是处理器(使用path+method匹配处理器)
+  
+  
  http://www.tuicool.com/articles/VrAbe2
  **/
 
@@ -506,7 +520,7 @@ proto.route = function route(path) {
     sensitive: this.caseSensitive,
     strict: this.strict,
     end: true
-  }, route.dispatch.bind(route));
+  }, route.dispatch.bind(route));//把自身绑定为运行时的this
 
   layer.route = route;
 

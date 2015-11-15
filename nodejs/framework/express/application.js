@@ -35,6 +35,17 @@ var slice = Array.prototype.slice;
 **/
 
 /**
+
+名词约定
+path 路径
+router 路由器
+route 路由
+handler 处理器
+middleware 中间件
+
+**/
+
+/**
  * Application prototype.
  */
 

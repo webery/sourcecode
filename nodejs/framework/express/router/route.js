@@ -19,6 +19,14 @@ var Layer = require('./layer');
 var methods = require('methods');
 
 /**
+path完成中间件到处理器的映射
+每个中间件对应一个path
+一个route表示这样的一个中间件:支持细分为path+method匹配处理器
+
+**/
+
+
+/**
  * Module variables.
  * @private
  */
@@ -185,7 +193,7 @@ Route.prototype.all = function all() {
 
 methods.forEach(function(method){
   Route.prototype[method] = function(){
-    var handles = flatten(slice.call(arguments));
+    var handles = flatten(slice.call(arguments));//把处理器解析出来
 
     for (var i = 0; i < handles.length; i++) {
       var handle = handles[i];
@@ -198,10 +206,10 @@ methods.forEach(function(method){
 
       debug('%s %s', method, this.path);
 
-      var layer = Layer('/', {}, handle);
+      var layer = Layer('/', {}, handle);//构建
       layer.method = method;
 
-      this.methods[method] = true;
+      this.methods[method] = true;//标记method已经存在处理器(注意,如果同一个route重复method注册会发生覆盖)
       this.stack.push(layer);
     }
 
