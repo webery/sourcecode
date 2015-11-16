@@ -197,7 +197,7 @@ app.handle = function handle(req, res, callback) {
  *
  * @public
  */
-//
+//app.use -> router.use -> router注入中间件
 app.use = function use(fn) {
   var offset = 0;
   var path = '/';
@@ -492,7 +492,7 @@ methods.forEach(function(method){
 
     this.lazyrouter();
 
-    var route = this._router.route(path);
+    var route = this._router.route(path);//生成新的route
     route[method].apply(route, slice.call(arguments, 1));
     return this;
   };
@@ -507,11 +507,11 @@ methods.forEach(function(method){
  * @return {app} for chaining
  * @public
  */
-
+//新建一个路由route，并一次性注册全部http methods(GET,POST等)的方法
 app.all = function all(path) {
   this.lazyrouter();
 
-  var route = this._router.route(path);
+  var route = this._router.route(path);//生成新的路由
   var args = slice.call(arguments, 1);
 
   for (var i = 0; i < methods.length; i++) {
@@ -602,13 +602,13 @@ app.render = function render(name, options, callback) {
     }
   }
 
-  // render
+  // render渲染视图
   tryRender(view, renderOptions, done);
 };
 
 /**
  * Listen for connections.
- *
+ * 
  * A node `http.Server` is returned, with this
  * application (which is a `Function`) as its
  * callback. If you wish to create both an HTTP
@@ -634,11 +634,10 @@ app.listen = function listen() {
 
 /**
  * Log error using console.error.
- *
+ * 异常日志打印
  * @param {Error} err
  * @private
  */
-//异常日志打印
 function logerror(err) {
   /* istanbul ignore next */
   if (this.get('env') !== 'test') console.error(err.stack || err.toString());
@@ -646,9 +645,9 @@ function logerror(err) {
 
 /**
  * Try rendering a view.
+   渲染视图
  * @private
  */
-//渲染视图
 function tryRender(view, options, callback) {
   try {
     view.render(options, callback);

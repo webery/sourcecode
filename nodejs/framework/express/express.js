@@ -13,6 +13,13 @@ lib文件夹下都是express框架的核心.
 express.js是整个express框架的对外接口和整合
 通过express.js对application.js request.js response.js和其他中间件的整合,
 模块化思想吧..........
+
+express的工作流程
+
+app.handle => router.handle
+1.middleware
+2.route.dispatch -> middleware
+
 **/
 
 /**

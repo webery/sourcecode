@@ -49,13 +49,13 @@ module.exports = Route;
  */
 
 function Route(path) {
-  this.path = path;
+  this.path = path;//路径
   this.stack = [];
 
   debug('new %s', path);
 
   // route handlers for various http methods
-  this.methods = {};
+  this.methods = {};//记录已经注册有中间件的方法
 }
 
 /**
@@ -206,7 +206,7 @@ methods.forEach(function(method){
 
       debug('%s %s', method, this.path);
 
-      var layer = Layer('/', {}, handle);//构建
+      var layer = Layer('/', {}, handle);//构建中间件封装
       layer.method = method;
 
       this.methods[method] = true;//标记method已经存在处理器(注意,如果同一个route重复method注册会发生覆盖)

@@ -28,20 +28,22 @@ var parseUrl = require('parseurl');
  */
  
  /**
- router: 路由器 每个路由器包含多个路由层
- route: 路由 每个路由对应一个path, 多个method,也就是多个控制器
+ router: 路由器 每个路由器包含多个中间件封装或路由封装
+ route: 路由 每个路由对应一个path, 多个method,多个中间件封装层
  layer: 
-   1.路由器层{path, options(sensitive,strict:false,end:false), handler, route}
-   2.路由层 {path,options(sensitive,strict:this.strict,end:true),handler,method}
- A router object is an isolated instance of middleware and routes. 
-  performing middleware and routing functions
+   1.中间件封装，layer存的是path和handler{path, options(sensitive,strict:false,end:false), handler, route}
+   2.路由封装，layer存的是route {path,options(sensitive,strict:this.strict,end:true),handler,method}
+ 
+  添加路由器
+  app.use->router.use->注入中间件
   
-  添加路由器层
-  app.use->router.use->注入路由器层
+  1.
   创建路由层
   app.route->router.route->
   往route加入路由层
-  app[method]->route[method]
+  app[method]->route[method]注入中间件
+  
+  2.app.all 创建路由并注册中间件
   
   1.普通中间件,也就是路由器Layer层直接封装的是处理器(使用path直接匹配到处理器)
   2.route路由中间件,也就是路由器Layer层封装的是一个route.route封装的也是处理器(使用path+method匹配处理器)
@@ -512,7 +514,7 @@ proto.use = function use(fn) {
  * @return {Route}
  * @public
  */
-
+//生成新的route
 proto.route = function route(path) {
   var route = new Route(path);
 
@@ -531,8 +533,8 @@ proto.route = function route(path) {
 // create Router#VERB functions
 methods.concat('all').forEach(function(method){
   proto[method] = function(path){
-    var route = this.route(path)
-    route[method].apply(route, slice.call(arguments, 1));
+    var route = this.route(path)//生成新的route
+    route[method].apply(route, slice.call(arguments, 1));//注入method的中间件
     return this;
   };
 });
