@@ -15,6 +15,15 @@ const chunkExpression = common.chunkExpression;
 const httpSocketSetup = common.httpSocketSetup;
 const OutgoingMessage = require('_http_outgoing').OutgoingMessage;
 
+/**
+
+http 服务器模块
+
+Server启动，监听端口，然后有请求发过来，建立一个socket，实用HTTPParser解析IncomeMessage，
+生成Request和Response，触发Server注册的监听事件，把控制权交给监听处理函数
+
+**/
+
 //http状态码
 const STATUS_CODES = exports.STATUS_CODES = {
   100 : 'Continue',
@@ -82,7 +91,7 @@ const STATUS_CODES = exports.STATUS_CODES = {
 
 const kOnExecute = HTTPParser.kOnExecute | 0;
 
-//http响应
+//http响应Response
 function ServerResponse(req) {
   OutgoingMessage.call(this);
 
@@ -110,6 +119,7 @@ exports.ServerResponse = ServerResponse;//暴露Response对象
 ServerResponse.prototype.statusCode = 200;
 ServerResponse.prototype.statusMessage = undefined;
 
+//Response关闭触发事件
 function onServerResponseClose() {
   // EventEmitter.emit makes a copy of the 'close' listeners array before
   // calling the listeners. detachSocket() unregisters onServerResponseClose
@@ -131,7 +141,8 @@ function onServerResponseClose() {
   // Fortunately, that requires only a single if check. :-)
   if (this._httpMessage) this._httpMessage.emit('close');
 }
-
+//一个http请求，响应对应一个socket周期  一个socket对应一个request和一个Response
+//Response注册socket，这样Response就可以往客户端写入响应数据
 ServerResponse.prototype.assignSocket = function(socket) {
   assert(!socket._httpMessage);
   socket._httpMessage = this;
@@ -157,7 +168,7 @@ ServerResponse.prototype.writeContinue = function(cb) {
 ServerResponse.prototype._implicitHeader = function() {
   this.writeHead(this.statusCode);
 };
-
+//添加响应头
 ServerResponse.prototype.writeHead = function(statusCode, reason, obj) {
   var headers;
 
@@ -219,7 +230,7 @@ ServerResponse.prototype.writeHeader = function() {
   this.writeHead.apply(this, arguments);
 };
 
-
+//http 服务器对象，它是对net.Server对象的一个拓展
 function Server(requestListener) {
   if (!(this instanceof Server)) return new Server(requestListener);
   net.Server.call(this, { allowHalfOpen: true });
@@ -247,7 +258,7 @@ function Server(requestListener) {
 }
 util.inherits(Server, net.Server);//Http服务器Server继承net.Server,net.Server继承了EventEmitter
 
-
+//设置超时回调
 Server.prototype.setTimeout = function(msecs, callback) {
   this.timeout = msecs;
   if (callback)

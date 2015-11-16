@@ -6,6 +6,21 @@ const QueryString = exports;
 const Buffer = require('buffer').Buffer;
 
 
+/**
+
+querystring 指的就是url "?" 和 "#"之间的那部分
+
+例如http://www.google.com/?name=weber#page=1/#page=1
+querystrin: gname=weber
+
+该模块主要是完成querystring从url解析，string类型的querystring转换成object形式
+和object形式的qs转换成string类型的qs
+
+escape()、encodeURI()、encodeURIComponent()区别详解
+http://www.cnblogs.com/tylerdonet/p/3483836.html
+
+**/
+
 function charCode(c) {
   return c.charCodeAt(0);
 }
@@ -77,7 +92,7 @@ QueryString.unescapeBuffer = function(s, decodeSpaces) {
   return out.slice(0, outIndex - 1);
 };
 
-
+//反转义
 QueryString.unescape = function(s, decodeSpaces) {
   try {
     return decodeURIComponent(s);
@@ -90,6 +105,10 @@ QueryString.unescape = function(s, decodeSpaces) {
 var hexTable = new Array(256);
 for (var i = 0; i < 256; ++i)
   hexTable[i] = '%' + ((i < 16 ? '0' : '') + i.toString(16)).toUpperCase();
+
+//对字符串进行编码，这样就可以在所有的计算机上读取该字符串
+//str 需要转义的字符串
+//
 QueryString.escape = function(str) {
   // replaces encodeURIComponent
   // http://www.ecma-international.org/ecma-262/5.1/#sec-15.1.3.4
@@ -103,7 +122,8 @@ QueryString.escape = function(str) {
 
   for (i = 0; i < len; ++i) {
     c = str.charCodeAt(i);
-
+	
+	//这些字符不需要转义
     // These characters do not need escaping (in order):
     // ! - . _ ~
     // ' ( ) *
@@ -147,6 +167,7 @@ QueryString.escape = function(str) {
   return out;
 };
 
+//把v转换成字符串
 var stringifyPrimitive = function(v) {
   if (typeof v === 'string')
     return v;

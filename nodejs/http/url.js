@@ -1,7 +1,9 @@
 'use strict';
 
 /**
-URL函数对象
+
+URL对象
+
 **/
 
 const punycode = require('punycode');
@@ -24,8 +26,8 @@ function Url() {
   this.search = null;//
   this.query = null;//查询?
   this.pathname = null;/
-  this.path = null;
-  this.href = null;
+  this.path = null;//路径
+  this.href = null;//
 }
 
 // Reference: RFC 3986, RFC 1808, RFC 2396

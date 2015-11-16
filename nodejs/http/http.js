@@ -4,12 +4,20 @@ const util = require('util');
 const internalUtil = require('internal/util');
 const EventEmitter = require('events');
 
+/**
+
+http模块
+
+主要包含http服务器Server，Request，Response
+
+**/
+
 //IncomingMessage是请求Message的封装,对应request
 exports.IncomingMessage = require('_http_incoming').IncomingMessage;
 
 
 const common = require('_http_common');
-exports.METHODS = common.methods.slice().sort();
+exports.METHODS = common.methods.slice().sort();//暴露http methods
 
 //OutgoingMessage是响应Message的封装,对应Response
 exports.OutgoingMessage = require('_http_outgoing').OutgoingMessage;
@@ -27,6 +35,7 @@ exports.globalAgent = agent.globalAgent;//超全局的代理实例，是http客�
 const client = require('_http_client');
 const ClientRequest = exports.ClientRequest = client.ClientRequest;//表示nodejs发送http请求的封装
 
+//取代原来的Client
 exports.request = function(options, cb) {
   return new ClientRequest(options, cb);
 };

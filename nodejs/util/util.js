@@ -5,6 +5,14 @@ const Buffer = require('buffer').Buffer;
 const internalUtil = require('internal/util');
 const binding = process.binding('util');
 
+
+/**
+
+工具包
+
+**/
+
+
 var Debug;
 
 const formatRegExp = /%[sdj%]/g;
@@ -757,7 +765,7 @@ exports.inherits = function(ctor, superCtor) {
                         'have a prototype.');
 
   ctor.super_ = superCtor;
-  Object.setPrototypeOf(ctor.prototype, superCtor.prototype);
+  Object.setPrototypeOf(ctor.prototype, superCtor.prototype);//ES6新引入的方法,
 };
 
 exports._extend = function(origin, add) {
