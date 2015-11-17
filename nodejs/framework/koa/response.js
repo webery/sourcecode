@@ -20,6 +20,21 @@ const vary = require('vary');
 const extname = path.extname;
 
 /**
+
+用来拓展原生request功能
+
+**/
+
+/**
+
+socket表示一个完整的网络请求和响应，
+对应了一个输入流，一个输出流，在http中，就是一个request和Response
+服务器已经帮我们把数据请求message解析封装到request对象中，
+Response写入的数据，实际上是写入socket响应流中，返回给客户端。
+
+**/
+
+/**
  * Prototype.
  */
 
@@ -193,7 +208,7 @@ module.exports = {
    * @return {Number}
    * @api public
    */
-
+  //获取响应流的长度
   get length() {
     const len = this.header['content-length'];
     const body = this.body;
@@ -249,7 +264,7 @@ module.exports = {
    * @param {String} alt
    * @api public
    */
-
+   //跳转
   redirect(url, alt) {
     // location
     if ('back' == url) url = this.ctx.get('Referrer') || alt || '/';
@@ -277,7 +292,7 @@ module.exports = {
    * @param {String} filename
    * @api public
    */
-
+  //有时候我们发现，打开的是一个pdf，或者mp3文件，有时候浏览器会自动播放，有时候会弹框提示保存，就和这个属性相关
   attachment(filename) {
     if (filename) this.type = extname(filename);
     this.set('Content-Disposition', contentDisposition(filename));
@@ -298,7 +313,7 @@ module.exports = {
    * @param {String} type
    * @api public
    */
-
+  //设置响应类型
   set type(type) {
     type = getType(type) || false;
     if (type) {
@@ -317,7 +332,7 @@ module.exports = {
    * @param {String|Date} type
    * @api public
    */
-
+  //客户端缓存服务器静态资源，例如css,js的时候经常用到的一个熟悉lastModified
   set lastModified(val) {
     if ('string' == typeof val) val = new Date(val);
     this.set('Last-Modified', val.toUTCString());
@@ -370,7 +385,7 @@ module.exports = {
    * @return {String}
    * @api public
    */
-
+  //获取响应的mime类型，html，JSON等
   get type() {
     const type = this.get('Content-Type');
     if (!type) return '';
@@ -385,7 +400,7 @@ module.exports = {
    * @return {String|false}
    * @api public
    */
-
+  //判断响应类型是不是types其中的一种
   is(types) {
     const type = this.type;
     if (!types) return type || false;
@@ -408,7 +423,7 @@ module.exports = {
    * @return {String}
    * @api public
    */
-
+  //获取一个响应头
   get(field) {
     return this.header[field.toLowerCase()] || '';
   },
@@ -427,7 +442,7 @@ module.exports = {
    * @param {String} val
    * @api public
    */
-
+  //设置一个响应头
   set(field, val) {
     if (2 == arguments.length) {
       if (Array.isArray(val)) val = val.map(String);
@@ -455,7 +470,7 @@ module.exports = {
    * @param {String|Array} val
    * @api public
    */
-
+  //以key-value的形式给指定的file附加响应头value，也就是一个key-多个value的形式
   append(field, val) {
     const prev = this.get(field);
 
@@ -474,7 +489,7 @@ module.exports = {
    * @param {String} name
    * @api public
    */
-
+  //删除指定的响应头
   remove(field) {
     this.res.removeHeader(field);
   },
@@ -487,7 +502,7 @@ module.exports = {
    * @return {Boolean}
    * @api private
    */
-
+  //判断当前绑定的socket是否可写
   get writable() {
     const socket = this.res.socket;
     if (!socket) return false;

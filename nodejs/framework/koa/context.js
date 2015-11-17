@@ -11,6 +11,14 @@ const delegate = require('delegates');
 const statuses = require('statuses');
 
 /**
+
+koa会基于系统基础的request和Response，对每一个请求生成一个对应的context。
+这个context其实就是一个给用户获取koa环境中参数的接口。我们可以通过context获取
+request，Response，koa整个系统的环境变量等(包括配置参数，类似于mybatis的configuration)。
+
+**/
+
+/**
  * Context prototype.
  */
 
@@ -141,7 +149,9 @@ const proto = module.exports = {
 /**
  * Response delegation.
  */
-
+//当访问context的下面这些属性或者方法的时候，实际会转向context.response对象中，context有点代理的意思
+//koa给中间件传入的是context，给context添加这些接口，用起来更方便！
+//例如context.remove -  context.response.remove
 delegate(proto, 'response')
   .method('attachment')
   .method('redirect')
@@ -162,7 +172,7 @@ delegate(proto, 'response')
 /**
  * Request delegation.
  */
-
+//同上
 delegate(proto, 'request')
   .method('acceptsLanguages')
   .method('acceptsEncodings')

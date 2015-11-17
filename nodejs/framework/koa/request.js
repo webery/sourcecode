@@ -13,6 +13,15 @@ const typeis = require('type-is');
 const fresh = require('fresh');
 
 /**
+
+用来拓展原生request功能
+request其实有点像装饰器模式
+很多拓展都是在原生req基础上加入get set
+
+装饰器模式，推荐mybatis的executor和cache的设计
+**/
+
+/**
  * Prototype.
  */
 

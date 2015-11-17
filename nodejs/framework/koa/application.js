@@ -28,7 +28,7 @@ kao1.x的时候还是使用GeneratorFunction作为中间件,
 现在是koa2.x, 依然兼容GF(使用co模块). 但是推荐ES7 的Sync wait
 
 koa和express很大不同的是, 我们的中间件和控制器是(req, res, [next])这样的形式去写函数
-但是在koa中完全不需要这样, 而是从context获取.
+但是在koa中完全不需要这样, 而是从context获取(request和Response包含在context中).
 
 **/
 
@@ -60,13 +60,11 @@ module.exports = class Application extends Emitter {
   /**
    * Shorthand for:
    *
-   *    http.createServer(app.callback()).listen(...)
-   *    生成服务器并启动服务器
    * @param {Mixed} ...
    * @return {Server}
    * @api public
    */
-
+   //http.createServer(app.callback()).listen(...)生成服务器并启动服务器
   listen() {
     debug('listen');
     const server = http.createServer(this.callback());
@@ -119,11 +117,11 @@ module.exports = class Application extends Emitter {
   /**
    * Return a request handler callback
    * for node's native http server.
-   * 生成一个服务器 request事件回调函数
+   * 
    * @return {Function}
    * @api public
    */
-
+//生成一个服务器 request事件回调函数
   callback() {
     const fn = compose(this.middleware);//多个中间件封装成一个集合,请看koa-component模块
 
@@ -144,13 +142,13 @@ module.exports = class Application extends Emitter {
    * @api private
    */
 
-  createContext(req, res) {
+  createContext(req, res) {//基础context，基础request，基础Response把每个请求公用的代码都抽了出来，代码复用!
     const context = Object.create(this.context);
     const request = context.request = Object.create(this.request);
     const response = context.response = Object.create(this.response);
-    context.app = request.app = response.app = this;
-    context.req = request.req = response.req = req;
-    context.res = request.res = response.res = res;
+    context.app = request.app = response.app = this;//把koa对象加入context
+    context.req = request.req = response.req = req;//加入原生request
+    context.res = request.res = response.res = res;//加入原生Response
     request.ctx = response.ctx = context;
     request.response = response;
     response.request = request;
