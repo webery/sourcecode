@@ -1,0 +1,31 @@
+pixel
+
+px
+dp,pt 设备无关像素
+
+dpr 设备像素缩放比
+
+1px = (dpr)*(dpr) * dp
+
+PPI
+
+Viewport
+1.页面渲染在一个数值的viewport
+2.缩放
+
+visual viewport
+layout viewport
+
+Meta标签
+
+document.body.clientWidth
+window.innerWidth
+
+width 设置layout viewport的特定值 device-width 设备宽度
+initial-scale 设置页面的初始缩放
+minimum-scale 最小缩放
+maximum-scale 最大缩放
+user-scalable 用户能否缩放
+
+
+http://www.cnblogs.com/2050/p/3877280.html
