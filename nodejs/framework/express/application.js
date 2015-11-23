@@ -148,6 +148,7 @@ app.defaultConfiguration = function defaultConfiguration() {
  *
  * @private
  */
+//懒初始化路由器,并加入系统自带的中间件
 app.lazyrouter = function lazyrouter() {
   if (!this._router) {//初始化路由器,路由器就是个中间件容器.存放中间件的封装
     this._router = new Router({
@@ -264,7 +265,7 @@ app.use = function use(fn) {
  *
  * @public
  */
-
+//根据指定的path生成一个新的路由
 app.route = function route(path) {
   this.lazyrouter();
   return this._router.route(path);
@@ -356,7 +357,7 @@ app.param = function param(name, fn) {
  *    // => "bar"
  *
  * Mounted servers inherit their parent server's settings.
- *
+ * 子服务器继承父服务器的配置
  * @param {String} setting
  * @param {*} [val]
  * @return {Server} for chaining
@@ -482,7 +483,7 @@ app.disable = function disable(setting) {
 /**
  * Delegate `.VERB(...)` calls to `router.VERB(...)`.
  */
-
+//和all类似
 methods.forEach(function(method){
   app[method] = function(path){
     if (method === 'get' && arguments.length === 1) {
@@ -490,7 +491,7 @@ methods.forEach(function(method){
       return this.set(path);
     }
 
-    this.lazyrouter();
+    this.lazyrouter();//初始化router
 
     var route = this._router.route(path);//生成新的route
     route[method].apply(route, slice.call(arguments, 1));
@@ -509,13 +510,13 @@ methods.forEach(function(method){
  */
 //新建一个路由route，并一次性注册全部http methods(GET,POST等)的方法
 app.all = function all(path) {
-  this.lazyrouter();
+  this.lazyrouter();//初始化router
 
   var route = this._router.route(path);//生成新的路由
   var args = slice.call(arguments, 1);
 
   for (var i = 0; i < methods.length; i++) {
-    route[methods[i]].apply(route, args);
+    route[methods[i]].apply(route, args);//注册路由中所有method中间件
   }
 
   return this;
@@ -628,16 +629,17 @@ app.render = function render(name, options, callback) {
  */
 //生成HTTP Server并启动
 app.listen = function listen() {
-  var server = http.createServer(this);
+  var server = http.createServer(this);//这里的this是createApplication() 中的 app函数对象
   return server.listen.apply(server, arguments);
 };
 
 /**
  * Log error using console.error.
- * 异常日志打印
+ * 
  * @param {Error} err
  * @private
  */
+//异常日志打印
 function logerror(err) {
   /* istanbul ignore next */
   if (this.get('env') !== 'test') console.error(err.stack || err.toString());

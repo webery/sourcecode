@@ -156,7 +156,7 @@ proto.param = function param(name, fn) {
  * Dispatch a req, res into the router.
  * @private
  */
-//路由器处理请求,其实这个和connect的handle差不多
+//这个和connect框架的handle差不多,路由器处理请求
 proto.handle = function handle(req, res, out) {
   var self = this;
 
