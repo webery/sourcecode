@@ -27,5 +27,23 @@ minimum-scale 最小缩放
 maximum-scale 最大缩放
 user-scalable 用户能否缩放
 
+display: flex
+justify-content:center;//水平
+align-items:center;//垂直
+
+响应式
+媒体查询
+screen
+print
+handheld 手持设备
+all 通用
+
+width 视口宽度
+height 视口高度
+device-width 设备的宽度
+device-height 设备的高度
+orientation 检查设备处于横向
+landscape 还是竖屏portrait
+
 
 http://www.cnblogs.com/2050/p/3877280.html

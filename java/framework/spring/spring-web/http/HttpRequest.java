@@ -21,7 +21,7 @@ import java.net.URI;
 /**
  * Represents an HTTP request message, consisting of {@linkplain #getMethod() method}
  * and {@linkplain #getURI() uri}.
- *
+ *  表示http请求报文
  * @author Arjen Poutsma
  * @since 3.1
  */

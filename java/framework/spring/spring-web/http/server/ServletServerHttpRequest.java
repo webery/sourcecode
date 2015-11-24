@@ -44,7 +44,8 @@ import org.springframework.util.StringUtils;
 
 /**
  * {@link ServerHttpRequest} implementation that is based on a {@link HttpServletRequest}.
- *
+ * 服务端Servlet的http请求报文的表示。实际上，就是对tomcat这样服务器提供的servlet标准的Request的扩展和再封装，
+   把服务器给的Request抽象成SpringMVC框架的请求报文，方便SpringMVC的使用。
  * @author Arjen Poutsma
  * @author Rossen Stoyanchev
  * @since 3.0

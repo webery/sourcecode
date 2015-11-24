@@ -42,7 +42,7 @@ import org.springframework.util.StringUtils;
 
 /**
  * Represents HTTP request and response headers, mapping string header names to list of string values.
- *
+ * 表示http请求或者响应的全部响应头
  * <p>In addition to the normal methods defined by {@link Map}, this class offers the following
  * convenience methods:
  * <ul>

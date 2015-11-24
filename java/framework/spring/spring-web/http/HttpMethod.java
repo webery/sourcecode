@@ -20,7 +20,7 @@ package org.springframework.http;
  * Java 5 enumeration of HTTP request methods. Intended for use
  * with {@link org.springframework.http.client.ClientHttpRequest}
  * and {@link org.springframework.web.client.RestTemplate}.
- *
+ *  使用枚举类型表示全部的http请求方法
  * @author Arjen Poutsma
  * @since 3.0
  */

@@ -22,7 +22,7 @@ import java.io.InputStream;
 /**
  * Represents an HTTP input message, consisting of {@linkplain #getHeaders() headers}
  * and a readable {@linkplain #getBody() body}.
- *
+ * 表示一个http请求报文
  * <p>Typically implemented by an HTTP request on the server-side, or a response on the client-side.
  *
  * @author Arjen Poutsma
