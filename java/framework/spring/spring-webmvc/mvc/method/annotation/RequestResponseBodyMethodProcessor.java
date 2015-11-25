@@ -3,7 +3,7 @@
  * return values from methods annotated with {@code @ResponseBody} by reading
  * and writing to the body of the request or response with an
  * {@link HttpMessageConverter}.
- *
+ *  包含一系列的报文转换器。可以通过请求头或者url后缀决定使用哪种转换器。需要在XML中配置。
  * <p>An {@code @RequestBody} method argument is also validated if it is
  * annotated with {@code @javax.validation.Valid}. In case of validation
  * failure, {@link MethodArgumentNotValidException} is raised and results
@@ -60,7 +60,7 @@ public class RequestResponseBodyMethodProcessor extends AbstractMessageConverter
 		mavContainer.addAttribute(BindingResult.MODEL_KEY_PREFIX + name, binder.getBindingResult());
 		return argument;
 	}
-	//数据校验
+	//数据校验，使用的是注解校验
 	private void validate(WebDataBinder binder, MethodParameter parameter) throws Exception {
 		Annotation[] annotations = parameter.getParameterAnnotations();
 		for (Annotation ann : annotations) {

@@ -25,7 +25,10 @@ import org.springframework.http.MediaType;
 
 /**
  * Strategy interface that specifies a converter that can convert from and to HTTP requests and responses.
- *
+ * http报文转换器，把请求报文转换成java对象，或者把java对象转换成响应报文
+   Tomcat这样的服务器把请求参数全部解析成字符串，可以说是没有类型的，使用报文转换器可以把这些字符串转换成我们需要的
+   java对象，例如JSON，XML。
+   转换器被RequestResponseBodyMethodProcessor使用
  * @author Arjen Poutsma
  * @author Juergen Hoeller
  * @since 3.0

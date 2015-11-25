@@ -1,7 +1,7 @@
 /**
  * Handles method return values by delegating to a list of registered {@link HandlerMethodReturnValueHandler}s.
  * Previously resolved return types are cached for faster lookups.
- *
+ * 多个返回值类型解析器的组合。被RequestMappingHandlerAdapter处理器适配器使用
  * @author Rossen Stoyanchev
  * @since 3.1
  */

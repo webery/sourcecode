@@ -24,7 +24,7 @@ import org.springframework.web.context.request.NativeWebRequest;
 /**
  * Strategy interface for resolving method parameters into argument values in
  * the context of a given request.
- *
+ * 从http报文中解析参数，转换成调用处理器参数的值
  * @author Arjen Poutsma
  * @since 3.1
  * @see HandlerMethodReturnValueHandler

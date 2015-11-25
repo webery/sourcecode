@@ -34,7 +34,7 @@ import org.springframework.util.StringUtils;
 
 /**
  * Implementation of {@link HttpMessageConverter} that can read and write {@link Resource Resources}.
- *
+ *  Resource是Spring高度资源抽象的接口
  * <p>By default, this converter can read all media types. The Java Activation Framework (JAF) -
  * if available - is used to determine the {@code Content-Type} of written resources.
  * If JAF is not available, {@code application/octet-stream} is used.

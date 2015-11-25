@@ -1,7 +1,8 @@
 /**
  * Resolves method parameters by delegating to a list of registered {@link HandlerMethodArgumentResolver}s.
  * Previously resolved method parameters are cached for faster lookups.
- *
+ *  包含多个HandlerMethodArgumentResolver
+    被RequestMappingHandlerAdapter处理器适配器使用
  * @author Rossen Stoyanchev
  * @since 3.1
  */

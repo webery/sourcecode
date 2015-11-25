@@ -34,7 +34,7 @@ import org.springframework.util.Assert;
  * This can be overridden by setting the
  * {@link #setSupportedMediaTypes supportedMediaTypes} property.
  * Example of usage:
- *
+ * java对象和响应字符串转换器
  * <pre class="code">
  * &lt;bean class="org.springframework.http.converter.ObjectToStringHttpMessageConverter">
  *   &lt;constructor-arg>

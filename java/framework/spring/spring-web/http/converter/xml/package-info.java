@@ -16,7 +16,7 @@
  */
 
 /**
- *
+ * XML报文转换器
  * Provides an HttpMessageConverter implementations for handling XML.
  *
  */

@@ -32,7 +32,7 @@ import org.springframework.util.CollectionUtils;
 
 /**
  * {@link ServerHttpResponse} implementation that is based on a {@link HttpServletResponse}.
- *
+ *  表示SpringMVC框架端的响应，对Servlet原生响应的封装拓展，方便框架的使用。
  * @author Arjen Poutsma
  * @author Rossen Stoyanchev
  * @since 3.0
