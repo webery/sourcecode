@@ -36,7 +36,7 @@ import org.springframework.util.comparator.CompoundComparator;
 /**
  * A sub-class of {@link MimeType} that adds support for quality parameters as defined
  * in the HTTP specification.
- *
+ * MimeType类型的拓展
  * @author Arjen Poutsma
  * @author Juergen Hoeller
  * @author Rossen Stoyanchev

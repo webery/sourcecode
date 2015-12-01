@@ -1,7 +1,8 @@
 /**
  * Special {@link org.springframework.validation.DataBinder} to perform data binding
  * from servlet request parameters to JavaBeans, including support for multipart files.
- *
+ * Servlet数据绑定，在构造处理器参数的时候，该类有很多的作用，包括类型转换，数据校验等。
+   从Request请求中获取参数，绑定到java对象或者转换成java基本类型。
  * <p>See the DataBinder/WebDataBinder superclasses for customization options,
  * which include specifying allowed/required fields, and registering custom
  * property editors.

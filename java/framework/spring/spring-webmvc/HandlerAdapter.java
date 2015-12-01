@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * MVC framework SPI, allowing parameterization of the core MVC workflow.
- *
+ *  处理器适配器接口。处理器适配器用来调用处理器。
  * <p>Interface that must be implemented for each handler type to handle a request.
  * This interface is used to allow the {@link DispatcherServlet} to be indefinitely
  * extensible. The {@code DispatcherServlet} accesses all installed handlers through

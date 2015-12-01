@@ -9,6 +9,7 @@
  * 	<li>{@link ProducesRequestCondition}
  * 	<li>{@code RequestCondition} (optional, custom request condition)
  * </ol>
+   使用@RequestMapping注解和所在方法上的对应关系。也就是请求信息和处理器的映射关系。
  *
  * @author Arjen Poutsma
  * @author Rossen Stoyanchev

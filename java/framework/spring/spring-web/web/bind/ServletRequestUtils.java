@@ -21,7 +21,8 @@ import javax.servlet.ServletRequest;
 /**
  * Parameter extraction methods, for an approach distinct from data binding,
  * in which parameters of specific types are required.
- *
+ * Servlet请求工具类，标准的servlet request，得到的原生请求数据都是string类型的，该工具类主要是方便直接
+   获取参数为java常用的类型。
  * <p>This approach is very useful for simple submissions, where binding
  * request parameters to a command object would be overkill.
  *

@@ -42,7 +42,7 @@ import org.springframework.util.StringUtils;
 
 /**
  * Represents HTTP request and response headers, mapping string header names to list of string values.
- * 表示http请求或者响应的全部响应头
+ * 表示多个消息头，可以认为是一个请求或者响应的全部消息头
  * <p>In addition to the normal methods defined by {@link Map}, this class offers the following
  * convenience methods:
  * <ul>
@@ -56,10 +56,11 @@ import org.springframework.util.StringUtils;
  * @author Arjen Poutsma
  * @since 3.0
  */
+//以为消息头一个key可以对应多个values,所以需要用MultiValueMap
 public class HttpHeaders implements MultiValueMap<String, String>, Serializable {
 
 	private static final long serialVersionUID = -8578554704772377436L;
-
+	//下面的常量是常用的请求头字符串
 	private static final String ACCEPT = "Accept";
 
 	private static final String ACCEPT_CHARSET = "Accept-Charset";

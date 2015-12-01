@@ -18,7 +18,7 @@ package org.springframework.http;
 
 /**
  * Java 5 enumeration of HTTP status codes.
- *  http全部的状态码
+ *  使用枚举表示http状态码
  * <p>The HTTP status code series can be retrieved via {@link #series()}.
  *
  * @author Arjen Poutsma

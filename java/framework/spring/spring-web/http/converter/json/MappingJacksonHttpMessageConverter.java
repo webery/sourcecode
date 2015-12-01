@@ -39,7 +39,7 @@ import org.springframework.util.Assert;
 /**
  * Implementation of {@link org.springframework.http.converter.HttpMessageConverter HttpMessageConverter} that
  * can read and write JSON using <a href="http://jackson.codehaus.org/">Jackson 1.x's</a> {@link ObjectMapper}.
- *
+ *  java对象和JSON对象之间的装换。例如，可以把一个JSON表单的数据转换成一个java对象，或者一个数据集合的java对象。
  * <p>This converter can be used to bind to typed beans, or untyped {@link java.util.HashMap HashMap} instances.
  *
  * <p>By default, this converter supports {@code application/json}. This can be overridden by setting the

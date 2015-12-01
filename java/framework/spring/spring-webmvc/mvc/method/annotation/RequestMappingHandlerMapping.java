@@ -43,7 +43,7 @@ import org.springframework.web.servlet.mvc.method.RequestMappingInfoHandlerMappi
  * Creates {@link RequestMappingInfo} instances from type and method-level
  * {@link RequestMapping @RequestMapping} annotations in
  * {@link Controller @Controller} classes.
- *
+ * HandlerMapping的其中一种实现，也是现在常用的。基于@RequestMapping管理请求和处理器映射关系。
  * @author Arjen Poutsma
  * @author Rossen Stoyanchev
  * @since 3.1

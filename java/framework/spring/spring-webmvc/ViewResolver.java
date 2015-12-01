@@ -20,7 +20,7 @@ import java.util.Locale;
 
 /**
  * Interface to be implemented by objects that can resolve views by name.
- *
+ * 视图解析器接口,使用Controller返回值构造对应的视图类型,JstlView等
  * <p>View state doesn't change during the running of the application,
  * so implementations are free to cache views.
  *

@@ -1,2 +1,6 @@
 http://my.oschina.net/lichhao/blog/172562 SpringMVC源码剖析（五)-消息转换器
+http://www.cnblogs.com/Leo_wl/p/3735823.html 详解SpringMVC中Controller的方法中参数的工作原理[附带源码分析]
+
+
 http://www.w3.org/Protocols/rfc2616/rfc2616-sec4.html
+http://www.cnblogs.com/hyddd/archive/2009/04/19/1438971.html

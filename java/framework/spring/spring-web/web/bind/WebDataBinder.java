@@ -3,7 +3,7 @@
  * to JavaBean objects. Designed for web environments, but not dependent on
  * the Servlet API; serves as base class for more specific DataBinder variants,
  * such as {@link org.springframework.web.bind.ServletRequestDataBinder}.
- *
+ * Web数据绑定
  * <p>Includes support for field markers which address a common problem with
  * HTML checkboxes and select options: detecting that a field was part of
  * the form, but did not generate a request parameter because it was empty.

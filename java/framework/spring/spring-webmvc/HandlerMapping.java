@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * Interface to be implemented by objects that define a mapping between
  * requests and handler objects.
- *
+ *  http请求和处理器关系的接口。也就是根据http请求匹配到对应的接口，一般根据url等匹配。
  * <p>This class can be implemented by application developers, although this is not
  * necessary, as {@link org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping}
  * and {@link org.springframework.web.servlet.handler.SimpleUrlHandlerMapping}

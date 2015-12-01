@@ -122,6 +122,7 @@ import org.springframework.util.ClassUtils;
  * @author Juergen Hoeller
  * @since 3.2
  */
+ //需要导入Jackson的jar包，并需要配置才能起效。
 public class Jackson2ObjectMapperFactoryBean implements FactoryBean<ObjectMapper>, BeanClassLoaderAware, InitializingBean {
 
 	private ObjectMapper objectMapper;

@@ -21,7 +21,7 @@ import org.springframework.util.ObjectUtils;
 
 /**
  * Represents an HTTP request or response entity, consisting of headers and body.
- * 表示http请求或者响应体
+ * 表示http请求体或者响应体
  * <p>Typically used in combination with the {@link org.springframework.web.client.RestTemplate RestTemplate}, like so:
  * <pre class="code">
  * HttpHeaders headers = new HttpHeaders();
@@ -61,7 +61,7 @@ public class HttpEntity<T> {
 
 	private final HttpHeaders headers;
 
-	private final T body;
+	private final T body;//这里的请求体是泛型抽象的，可以是任何java类型。在controller中可以直接返回一个HttpEntity
 
 
 	/**

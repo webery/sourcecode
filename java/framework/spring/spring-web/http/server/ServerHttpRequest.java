@@ -24,7 +24,7 @@ import org.springframework.http.HttpRequest;
 
 /**
  * Represents a server-side HTTP request.
- *  表示服务端的http请求
+ *  表示服务端的http请求，实际上是对servlet提供的request的封装和拓展
  * @author Arjen Poutsma
  * @author Rossen Stoyanchev
  * @since 3.0

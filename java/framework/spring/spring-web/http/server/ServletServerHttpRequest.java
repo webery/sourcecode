@@ -59,7 +59,7 @@ public class ServletServerHttpRequest implements ServerHttpRequest {
 	private static final String METHOD_POST = "POST";
 
 
-	private final HttpServletRequest servletRequest;
+	private final HttpServletRequest servletRequest;//服务器提供的servlet标准Request
 
 	private HttpHeaders headers;
 

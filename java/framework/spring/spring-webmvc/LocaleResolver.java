@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
  * Interface for web-based locale resolution strategies that allows for
  * both locale resolution via the request and locale modification via
  * request and response.
- *
+ *  国际化解析器接口
  * <p>This interface allows for implementations based on request, session,
  * cookies, etc. The default implementation is
  * {@link org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver},

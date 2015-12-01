@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
  * Interface for web-based theme resolution strategies that allows for
  * both theme resolution via the request and theme modification via
  * request and response.
- *
+ *  主题解析器接口
  * <p>This interface allows for implementations based on session,
  * cookies, etc. The default implementation is
  * {@link org.springframework.web.servlet.theme.FixedThemeResolver},

@@ -26,7 +26,7 @@ import org.springframework.http.MediaType;
 /**
  * MVC View for a web interaction. Implementations are responsible for rendering
  * content, and exposing the model. A single view exposes multiple model attributes.
- *
+ *  视图抽象接口，例如JstlView, PdfView等
  * <p>This class and the MVC approach associated with it is discussed in Chapter 12 of
  * <a href="http://www.amazon.com/exec/obidos/tg/detail/-/0764543857/">Expert One-On-One J2EE Design and Development</a>
  * by Rod Johnson (Wrox, 2002).

@@ -30,7 +30,7 @@ import org.springframework.util.CollectionUtils;
 /**
  * Handler execution chain, consisting of handler object and any handler interceptors.
  * Returned by HandlerMapping's {@link HandlerMapping#getHandler} method.
- *
+ * 处理器和拦截器的组合。包含了一个请求对应的处理器，和这个处理器相关的拦截器。请参照DispatchServlet
  * @author Juergen Hoeller
  * @since 20.06.2003
  * @see HandlerInterceptor
