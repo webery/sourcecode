@@ -22,6 +22,14 @@ var deprecate = require('depd')('express');
 var flatten = require('array-flatten');
 var parseUrl = require('parseurl');
 
+//app.use -> router.use -> router注入中间件 绑定系统级中间件
+//app.route -> router.route -> new Route注入处理器
+//app.all -> router.route -> route注入处理器
+//app[method] -> router.route -> route注入处理器
+
+//router[method] -> this.route(path) -> route注入中间件
+//router.use -> router注入中间件 -> app.use 绑定router级别中间件
+
 /**
  * Module variables.
  * @private
