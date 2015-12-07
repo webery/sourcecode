@@ -16,6 +16,30 @@
 var pathRegexp = require('path-to-regexp');
 var debug = require('debug')('express:router:layer');
 
+
+/**
+
+路由器和路由栈存储的封装层
+
+1.router中的Layer
+Layer(
+path: path, 
+options: {sensitive: this.caseSensitive,strict: false,end: false}, 
+handle: fn,
+route: undefined
+);
+
+2.route中的Layer
+Layer(
+path: path,
+options: {sensitive: this.caseSensitive,strict: this.strict,end: true},
+handle: route.dispatch.bind(route));//把自身绑定为运行时的this
+route: route
+)
+
+
+**/
+
 /**
  * Module variables.
  * @private

@@ -23,7 +23,7 @@ var flatten = require('array-flatten');
 var parseUrl = require('parseurl');
 
 //app.use -> router.use -> router注入中间件 绑定系统级中间件
-//app.route -> router.route -> new Route注入处理器
+//app.route -> router.route -> new Route生成新的route -> 然后获得route实例，可以手动route[methods]
 //app.all -> router.route -> route注入处理器
 //app[method] -> router.route -> route注入处理器
 
