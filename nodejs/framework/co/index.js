@@ -48,10 +48,13 @@ co.wrap = function (fn) {
  * @return {Promise}
  * @api public
  */
+/*
+把一个generator封装成一个Promise执行
 
+*/
 function co(gen) {
   var ctx = this;//保存this, co函数依然是使用闭包
-  var args = slice.call(arguments, 1)
+  var args = slice.call(arguments, 1)//取出第一个参数以外的参数
 
   // we wrap everything in a promise to avoid promise chaining,
   // which leads to memory leak errors.
@@ -60,7 +63,7 @@ function co(gen) {
     if (typeof gen === 'function') gen = gen.apply(ctx, args);//gen可以是一个普通函数,普通函数会直接调用
     if (!gen || typeof gen.next !== 'function') return resolve(gen);//如果gen不存在或者gen不是迭代器,直接执行
 
-    onFulfilled();
+    onFulfilled();//第一次onFulfilled()调用！后面的调用由next()控制
 
     /**
      * @param {Mixed} res
@@ -68,7 +71,7 @@ function co(gen) {
      * @api private
      */
 	 
-	//fullfilled状态,执行一次gen.next()
+	//一次调用，会执行一次gen.next(),并调用next()处理结果
     function onFulfilled(res) {
       var ret;
       try {
@@ -103,13 +106,15 @@ function co(gen) {
      * @return {Promise}
      * @api private
      */
-
+	//一次onFulfilled调用表示，一次gen.next();
+	//而一次next()表示处理上一次gen.next()的结果，如果gen遍历完成，执行resolve()
+	//否则，调用onFulfilled执行下一次gen.next()。next()相当于gen遍历的控制器!
+	//注意，第一次onFulfilled调用不是next()完成的,因为必须执行一次，gen.next()才会有返回值
     function next(ret) {
-      if (ret.done) return resolve(ret.value);
-	  //没执行一次迭代,都需要把返回结果封装成Promise,注意到下一行代码提示,yield可以返回哪些值
-	  //一般返回thunk函数和Promise
-      var value = toPromise.call(ctx, ret.value);
-      if (value && isPromise(value)) return value.then(onFulfilled, onRejected);
+      if (ret.done) return resolve(ret.value);//遍历完成，执行resolve，表示该generator执行完成。
+      var value = toPromise.call(ctx, ret.value);//把gen.next()返回的值转换成Promise对象
+      if (value && isPromise(value)) return value.then(onFulfilled, onRejected);//使用Promise的方式，执行下一次onFulfilled
+	  //如果gen.next()返回的不是下面的类型，抛出异常
       return onRejected(new TypeError('You may only yield a function, promise, generator, array, or object, '
         + 'but the following object was passed: "' + String(ret.value) + '"'));
     }
@@ -118,12 +123,13 @@ function co(gen) {
 
 /**
  * Convert a `yield`ed value into a promise.
- * 把obj转换成Promise. 这个函数集中了后面多种把obj转换成Promise的函数
+ * 
  * @param {Mixed} obj
  * @return {Promise}
  * @api private
  */
-
+//把obj转换成Promise. 这个函数集中了后面多种把obj转换成Promise的函数
+//需要注意的是，除了if选中的情况外，其他情况是不会转换成Promise对象的。
 function toPromise(obj) {
   if (!obj) return obj;
   if (isPromise(obj)) return obj;
@@ -136,12 +142,12 @@ function toPromise(obj) {
 
 /**
  * Convert a thunk to a promise.
- * 把thunk对象转换成Promise
+ * 
  * @param {Function}
  * @return {Promise}
  * @api private
  */
-
+//把thunk对象转换成Promise对象
 function thunkToPromise(fn) {
   var ctx = this;
   return new Promise(function (resolve, reject) {
@@ -156,12 +162,12 @@ function thunkToPromise(fn) {
 /**
  * Convert an array of "yieldables" to a promise.
  * Uses `Promise.all()` internally.
- * 把数组转换成Promise
+ * 
  * @param {Array} obj
  * @return {Promise}
  * @api private
  */
-
+//把数组中的全部元素转换成Promise对象
 function arrayToPromise(obj) {
   return Promise.all(obj.map(toPromise, this));
 }
@@ -200,35 +206,36 @@ function objectToPromise(obj){
 
 /**
  * Check if `obj` is a promise.
- * 判断obj是不是一个Promise
+ * 
  * @param {Object} obj
  * @return {Boolean}
  * @api private
  */
-
+//判断obj是不是一个Promise实例对象
 function isPromise(obj) {
   return 'function' == typeof obj.then;
 }
 
 /**
  * Check if `obj` is a generator.
- * 判断一个obj是不是生成器的迭代器
+ * 
  * @param {Mixed} obj
  * @return {Boolean}
  * @api private
  */
-
+//判断obj是不是生Generator实例对象
 function isGenerator(obj) {
   return 'function' == typeof obj.next && 'function' == typeof obj.throw;
 }
 
 /**
  * Check if `obj` is a generator function.
- * 判断obj是不是Generator函数
+ * 
  * @param {Mixed} obj
  * @return {Boolean}
  * @api private
  */
+//判断obj是不是GeneratorFunction实例对象
 function isGeneratorFunction(obj) {
   var constructor = obj.constructor;
   if (!constructor) return false;
@@ -243,7 +250,8 @@ function isGeneratorFunction(obj) {
  * @return {Boolean}
  * @api private
  */
-
+//判断val是不是Function Object的实例对象
+//通过判断val原型链上的构造器是不是Object.
 function isObject(val) {
   return Object == val.constructor;
 }
