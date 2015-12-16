@@ -115,7 +115,7 @@ module.exports = class Application extends Emitter {
    */
 
   callback() {
-    const fn = compose(this.middleware);
+    const fn = compose(this.middleware);//fn是一个
 
     if (!this.listeners('error').length) this.on('error', this.onerror);
 

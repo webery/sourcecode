@@ -27,7 +27,7 @@ function compose(middleware){
    * @return {Promise}
    * @api public
    */
-
+   //
   return function (context, next) {
     // last called middleware #
     let index = -1
@@ -38,6 +38,8 @@ function compose(middleware){
       const fn = middleware[i] || next
       if (!fn) return Promise.resolve()
       try {
+		//1.执行完中间件fn,next作为参数，如果其中一个中间件木有执行next,那就会忽略后面的中间件。
+		//2.
         return Promise.resolve(fn(context, function next() {
           return dispatch(i + 1)
         }))
