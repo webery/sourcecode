@@ -140,13 +140,16 @@ proto.handle = function handle(req, res, out) {
   });
 
   // store the original URL
+  //保存原生的请求url
   req.originalUrl = req.originalUrl || req.url;
   
   //next闭包,相当于一个layer中间件的封装.其实它的功能很简单,首先,取出下一个要处理的中间件,
+  //每次next表示处理一个路由，或者完成所有路由，交给APP处理
   //然后从layer中间件把路径和处理器拿出来,
   //然后委托call函数调用处理器.然后呢......用过express的孩子知道,我们经常会在Controller执行完成后,
   //调用next(),这样就会调用下一个中间件了
   //next()的调用机制,有点像Java中的FilterChain或者Tomcat中的管道.
+  //JS是单线程的，不必担心性能问题
   function next(err) {
     if (slashAdded) {
       req.url = req.url.substr(1);
@@ -164,6 +167,7 @@ proto.handle = function handle(req, res, out) {
 
     // all done
 	//若stack中的中间件全部执行完成,就交给app接着处理
+	//为什么要异步调用嗯
     if (!layer) {
       defer(done, err);
       return;
@@ -175,6 +179,7 @@ proto.handle = function handle(req, res, out) {
 
     // skip this layer if the route doesn't match
 	//和我们前面说的一样,如果请求路径和中间件的路径不一致就跳过去
+	//connect的路由，只能简单的匹配路径
     if (path.toLowerCase().substr(0, route.length) !== route.toLowerCase()) {
       return next(err);
     }
@@ -242,7 +247,7 @@ proto.listen = function listen() {
  * Invoke a route handle.
  * @private
  */
-//中间件委托的执行函数,在next()中调用. 但是不处理异常,异常通过参数返回next()
+//next委托call调用中间件,中间件分为：异常处理中间件和非异常中间件。
 function call(handle, route, err, req, res, next) {
   var arity = handle.length;
   var error = err;
@@ -264,7 +269,7 @@ function call(handle, route, err, req, res, next) {
     }
   } catch (e) {
     // replace the error
-    error = e;//通过这里可以看到,后面的异常会覆盖前面的异常
+    error = e;//记录异常，交给下一个中间件，直道遇到异常中间件，或者新的异常会覆盖新的异常
   }
 
   // continue
