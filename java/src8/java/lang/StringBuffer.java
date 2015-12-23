@@ -94,6 +94,9 @@ import java.util.Arrays;
  * @see     java.lang.String
  * @since   JDK1.0
  */
+ /*
+ 线程安全的可变字符串序列，和StringBuilder对应
+ */
  public final class StringBuffer
     extends AbstractStringBuilder
     implements java.io.Serializable, CharSequence

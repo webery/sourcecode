@@ -108,13 +108,22 @@ import java.util.regex.PatternSyntaxException;
  * @since   JDK1.0
  */
 
+/*
+一个完整的Unicode字符叫CodePoint
+一个Java char 叫代码单元code unit;
+http://blog.csdn.net/feixingfei/article/details/3540179
+
+http://www.cnblogs.com/kissazi2/p/3648671.html 从源代码的角度聊聊java中StringBuffer、StringBuilder、String中的字符串拼接
+
+
+ */
 public final class String
     implements java.io.Serializable, Comparable<String>, CharSequence {
     /** The value is used for character storage. */
-    private final char value[];
+    private final char value[];//存储字符串的字符
 
     /** Cache the hash code for the string */
-    private int hash; // Default to 0
+    private int hash; // Default to 0字符串的哈希值缓存
 
     /** use serialVersionUID from JDK 1.0.2 for interoperability */
     private static final long serialVersionUID = -6849794470754667710L;

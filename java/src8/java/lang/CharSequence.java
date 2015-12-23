@@ -55,7 +55,7 @@ import java.util.stream.StreamSupport;
  * @since 1.4
  * @spec JSR-51
  */
-
+//字符串序列接口。实现该接口的类有：String，AbstractStringBuilder，StringBuilder，StringBuffer
 public interface CharSequence {
 
     /**
@@ -127,6 +127,7 @@ public interface CharSequence {
      * @return an IntStream of char values from this sequence
      * @since 1.8
      */
+	//返回字符串序列的二进制流
     public default IntStream chars() {
         class CharIterator implements PrimitiveIterator.OfInt {
             int cur = 0;

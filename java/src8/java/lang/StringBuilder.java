@@ -73,6 +73,9 @@ package java.lang;
  * @see         java.lang.String
  * @since       1.5
  */
+/*
+ 非线程安全的可变字符串序列。和StringBuffer对应
+*/
 public final class StringBuilder
     extends AbstractStringBuilder
     implements java.io.Serializable, CharSequence

@@ -44,16 +44,21 @@ import java.util.Arrays;
  * @author      Ulf Zibis
  * @since       1.5
  */
+/*
+实现该接口表示：可变/易变的字符串序列，和String相对。在CharSequence进一步拓展
+也就是该字符串序列是可以变化的。
+实现类有：StringBuffer、StringBuilder
+*/
 abstract class AbstractStringBuilder implements Appendable, CharSequence {
     /**
      * The value is used for character storage.
      */
-    char[] value;
+    char[] value;//存在字符串
 
     /**
      * The count is the number of characters used.
      */
-    int count;
+    int count;//记录字符个数，或者字符串长度
 
     /**
      * This no-arg constructor is necessary for serialization of subclasses.

@@ -133,5 +133,6 @@ public interface Comparable<T> {
      * @throws ClassCastException if the specified object's type prevents it
      *         from being compared to this object.
      */
+	//当前对象和目标对象T比较，大于目标对象返回1，等于返回0，小于返回-1
     public int compareTo(T o);
 }

@@ -48,6 +48,9 @@ import java.io.IOException;
  *
  * @since 1.5
  */
+/*
+实现该接口表示：可动态添加字符的对象。在尾部追加
+*/
 public interface Appendable {
 
     /**
@@ -68,7 +71,7 @@ public interface Appendable {
      * @throws  IOException
      *          If an I/O error occurs
      */
-    Appendable append(CharSequence csq) throws IOException;
+    Appendable append(CharSequence csq) throws IOException;//追加字符串序列
 
     /**
      * Appends a subsequence of the specified character sequence to this
@@ -104,7 +107,7 @@ public interface Appendable {
      * @throws  IOException
      *          If an I/O error occurs
      */
-    Appendable append(CharSequence csq, int start, int end) throws IOException;
+    Appendable append(CharSequence csq, int start, int end) throws IOException;//追加指定范围的字符串序列
 
     /**
      * Appends the specified character to this <tt>Appendable</tt>.
@@ -117,5 +120,5 @@ public interface Appendable {
      * @throws  IOException
      *          If an I/O error occurs
      */
-    Appendable append(char c) throws IOException;
+    Appendable append(char c) throws IOException;//追加一个字符
 }
