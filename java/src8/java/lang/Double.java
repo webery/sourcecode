@@ -46,6 +46,9 @@ import sun.misc.DoubleConsts;
  * @author  Joseph D. Darcy
  * @since JDK1.0
  */
+/*
+double 的对象表示
+*/
 public final class Double extends Number implements Comparable<Double> {
     /**
      * A constant holding the positive infinity of type

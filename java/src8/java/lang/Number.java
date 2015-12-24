@@ -52,6 +52,10 @@ package java.lang;
  * @jls 5.1.3 Narrowing Primitive Conversions
  * @since   JDK1.0
  */
+/*
+double，int等类型都不是对象。Number表示数字类型Java对象的抽象
+派生出具体的，int-Integer；double-Double等
+*/
 public abstract class Number implements java.io.Serializable {
     /**
      * Returns the value of the specified number as an {@code int},

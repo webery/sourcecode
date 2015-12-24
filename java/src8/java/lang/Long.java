@@ -51,18 +51,21 @@ import java.math.*;
  * @author  Joseph D. Darcy
  * @since   JDK1.0
  */
+/*
+long的对象表示
+*/
 public final class Long extends Number implements Comparable<Long> {
     /**
      * A constant holding the minimum value a {@code long} can
      * have, -2<sup>63</sup>.
      */
-    @Native public static final long MIN_VALUE = 0x8000000000000000L;
+    @Native public static final long MIN_VALUE = 0x8000000000000000L;//最小值
 
     /**
      * A constant holding the maximum value a {@code long} can
      * have, 2<sup>63</sup>-1.
      */
-    @Native public static final long MAX_VALUE = 0x7fffffffffffffffL;
+    @Native public static final long MAX_VALUE = 0x7fffffffffffffffL;//最大值
 
     /**
      * The {@code Class} instance representing the primitive type
