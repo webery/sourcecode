@@ -67,7 +67,9 @@ package java.util;
  * @author  Neal Gafter
  * @since 1.2
  */
-
+/*
+抽象列表实现，实现了列表公共部分。
+*/
 public abstract class AbstractList<E> extends AbstractCollection<E> implements List<E> {
     /**
      * Sole constructor.  (For invocation by subclass constructors, typically

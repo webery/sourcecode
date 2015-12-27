@@ -51,6 +51,10 @@ import java.util.function.Consumer;
  * @see Iterable
  * @since 1.2
  */
+/*
+迭代器，表示所有集合迭代器的最高抽象。
+迭代器用来遍历集合元素。
+*/
 public interface Iterator<E> {
     /**
      * Returns {@code true} if the iteration has more elements.
