@@ -126,6 +126,10 @@ import java.io.Serializable;
  * @see Set
  * @since 1.2
  */
+/*
+Map是一种key-value的结构。
+常用的Map是HashMap。
+*/
 public interface Map<K,V> {
     // Query Operations
 
@@ -162,7 +166,7 @@ public interface Map<K,V> {
      *         does not permit null keys
      * (<a href="{@docRoot}/java/util/Collection.html#optional-restrictions">optional</a>)
      */
-    boolean containsKey(Object key);
+    boolean containsKey(Object key);//是否包含键为key的对象
 
     /**
      * Returns <tt>true</tt> if this map maps one or more keys to the
@@ -209,7 +213,7 @@ public interface Map<K,V> {
      *         does not permit null keys
      * (<a href="{@docRoot}/java/util/Collection.html#optional-restrictions">optional</a>)
      */
-    V get(Object key);
+    V get(Object key);//获取键为key的值
 
     // Modification Operations
 
@@ -237,7 +241,7 @@ public interface Map<K,V> {
      * @throws IllegalArgumentException if some property of the specified key
      *         or value prevents it from being stored in this map
      */
-    V put(K key, V value);
+    V put(K key, V value);//往Map中加入一个key-value
 
     /**
      * Removes the mapping for a key from this map if it is present

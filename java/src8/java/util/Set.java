@@ -81,7 +81,9 @@ package java.util;
  * @see Collections#EMPTY_SET
  * @since 1.2
  */
-
+/*
+Set是一种存储重复元素的集合。常用的是HashSet
+*/
 public interface Set<E> extends Collection<E> {
     // Query Operations
 

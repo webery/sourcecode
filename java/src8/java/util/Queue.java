@@ -141,6 +141,9 @@ package java.util;
  * @author Doug Lea
  * @param <E> the type of elements held in this collection
  */
+/*
+队列接口。单向队列，对应的是双端队列Deque
+*/
 public interface Queue<E> extends Collection<E> {
     /**
      * Inserts the specified element into this queue if it is possible to do so

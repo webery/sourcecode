@@ -107,7 +107,10 @@ import java.util.function.UnaryOperator;
  * @see AbstractSequentialList
  * @since 1.2
  */
-
+/*
+列表集合抽象接口。实现该元素表示是一种列表集合。
+java中常用的列表集合有ArrayList数组列表，LinkedList链表列表
+*/
 public interface List<E> extends Collection<E> {
     // Query Operations
 
@@ -650,7 +653,7 @@ public interface List<E> extends Collection<E> {
      * @return a list iterator over the elements in this list (in proper
      *         sequence)
      */
-    ListIterator<E> listIterator();
+    ListIterator<E> listIterator();//取得列表迭代器
 
     /**
      * Returns a list iterator over the elements in this list (in proper
@@ -705,7 +708,7 @@ public interface List<E> extends Collection<E> {
      *         (<tt>fromIndex &lt; 0 || toIndex &gt; size ||
      *         fromIndex &gt; toIndex</tt>)
      */
-    List<E> subList(int fromIndex, int toIndex);
+    List<E> subList(int fromIndex, int toIndex);//截取列表的其中一部分
 
     /**
      * Creates a {@link Spliterator} over the elements in this list.

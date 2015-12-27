@@ -140,7 +140,10 @@ import java.util.stream.StreamSupport;
  * @see     AbstractCollection
  * @since 1.2
  */
-
+/*]
+集合抽象接口，实现该接口表示是一个集合类。它是Java集合框架的最基层接口。
+包含了接口的一些基本操作。
+*/
 public interface Collection<E> extends Iterable<E> {
     // Query Operations
 
@@ -151,14 +154,14 @@ public interface Collection<E> extends Iterable<E> {
      *
      * @return the number of elements in this collection
      */
-    int size();
+    int size();//返回集合中元素的个数
 
     /**
      * Returns <tt>true</tt> if this collection contains no elements.
      *
      * @return <tt>true</tt> if this collection contains no elements
      */
-    boolean isEmpty();
+    boolean isEmpty();//判断集合是否为空
 
     /**
      * Returns <tt>true</tt> if this collection contains the specified element.
@@ -176,7 +179,7 @@ public interface Collection<E> extends Iterable<E> {
      *         collection does not permit null elements
      *         (<a href="#optional-restrictions">optional</a>)
      */
-    boolean contains(Object o);
+    boolean contains(Object o);//集合中是否包含元素o
 
     /**
      * Returns an iterator over the elements in this collection.  There are no
@@ -186,7 +189,7 @@ public interface Collection<E> extends Iterable<E> {
      *
      * @return an <tt>Iterator</tt> over the elements in this collection
      */
-    Iterator<E> iterator();
+    Iterator<E> iterator();//取得集合的迭代器
 
     /**
      * Returns an array containing all of the elements in this collection.
@@ -204,7 +207,7 @@ public interface Collection<E> extends Iterable<E> {
      *
      * @return an array containing all of the elements in this collection
      */
-    Object[] toArray();
+    Object[] toArray();//把集合元素转换成一个数组
 
     /**
      * Returns an array containing all of the elements in this collection;
@@ -286,7 +289,7 @@ public interface Collection<E> extends Iterable<E> {
      * @throws IllegalStateException if the element cannot be added at this
      *         time due to insertion restrictions
      */
-    boolean add(E e);
+    boolean add(E e);//往集合添加一个元素
 
     /**
      * Removes a single instance of the specified element from this
@@ -308,7 +311,7 @@ public interface Collection<E> extends Iterable<E> {
      * @throws UnsupportedOperationException if the <tt>remove</tt> operation
      *         is not supported by this collection
      */
-    boolean remove(Object o);
+    boolean remove(Object o);//删除一个元素
 
 
     // Bulk Operations
@@ -331,7 +334,7 @@ public interface Collection<E> extends Iterable<E> {
      *         or if the specified collection is null.
      * @see    #contains(Object)
      */
-    boolean containsAll(Collection<?> c);
+    boolean containsAll(Collection<?> c);//当前集合是否包含c集合所有的元素
 
     /**
      * Adds all of the elements in the specified collection to this collection
@@ -357,7 +360,7 @@ public interface Collection<E> extends Iterable<E> {
      *         this time due to insertion restrictions
      * @see #add(Object)
      */
-    boolean addAll(Collection<? extends E> c);
+    boolean addAll(Collection<? extends E> c);//把集合c的全部元素加入当前集合
 
     /**
      * Removes all of this collection's elements that are also contained in the
@@ -382,7 +385,7 @@ public interface Collection<E> extends Iterable<E> {
      * @see #remove(Object)
      * @see #contains(Object)
      */
-    boolean removeAll(Collection<?> c);
+    boolean removeAll(Collection<?> c);//从当前集合中删除所有集合c包含的元素
 
     /**
      * Removes all of the elements of this collection that satisfy the given
@@ -450,7 +453,7 @@ public interface Collection<E> extends Iterable<E> {
      * @throws UnsupportedOperationException if the <tt>clear</tt> operation
      *         is not supported by this collection
      */
-    void clear();
+    void clear();//清空集合，相当于删除集合中的所有元素
 
 
     // Comparison and hashing

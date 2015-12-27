@@ -190,6 +190,9 @@ package java.util;
  * @since  1.6
  * @param <E> the type of elements held in this collection
  */
+/*
+双端队列抽象，在单向队列基础上拓展。
+*/
 public interface Deque<E> extends Queue<E> {
     /**
      * Inserts the specified element at the front of this deque if it is
