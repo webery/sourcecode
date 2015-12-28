@@ -140,14 +140,14 @@ public interface Map<K,V> {
      *
      * @return the number of key-value mappings in this map
      */
-    int size();
+    int size();//获取元素个数
 
     /**
      * Returns <tt>true</tt> if this map contains no key-value mappings.
      *
      * @return <tt>true</tt> if this map contains no key-value mappings
      */
-    boolean isEmpty();
+    boolean isEmpty();//map是否为空
 
     /**
      * Returns <tt>true</tt> if this map contains a mapping for the specified
@@ -186,7 +186,7 @@ public interface Map<K,V> {
      *         map does not permit null values
      * (<a href="{@docRoot}/java/util/Collection.html#optional-restrictions">optional</a>)
      */
-    boolean containsValue(Object value);
+    boolean containsValue(Object value);//map中是否包含value值
 
     /**
      * Returns the value to which the specified key is mapped,
@@ -273,7 +273,7 @@ public interface Map<K,V> {
      *         map does not permit null keys
      * (<a href="{@docRoot}/java/util/Collection.html#optional-restrictions">optional</a>)
      */
-    V remove(Object key);
+    V remove(Object key);//删除key
 
 
     // Bulk Operations
@@ -326,7 +326,7 @@ public interface Map<K,V> {
      *
      * @return a set view of the keys contained in this map
      */
-    Set<K> keySet();
+    Set<K> keySet();//获取所有key的Set集合
 
     /**
      * Returns a {@link Collection} view of the values contained in this map.
@@ -343,7 +343,7 @@ public interface Map<K,V> {
      *
      * @return a collection view of the values contained in this map
      */
-    Collection<V> values();
+    Collection<V> values();//获取所有value的集合
 
     /**
      * Returns a {@link Set} view of the mappings contained in this map.
@@ -361,7 +361,7 @@ public interface Map<K,V> {
      *
      * @return a set view of the mappings contained in this map
      */
-    Set<Map.Entry<K, V>> entrySet();
+    Set<Map.Entry<K, V>> entrySet();//获取key-value的Set集合
 
     /**
      * A map entry (key-value pair).  The <tt>Map.entrySet</tt> method returns
@@ -376,6 +376,9 @@ public interface Map<K,V> {
      * @see Map#entrySet()
      * @since 1.2
      */
+	/*
+	一个Entry表示Map中一个元素，也就是一个key-value实体
+	*/
     interface Entry<K,V> {
         /**
          * Returns the key corresponding to this entry.

@@ -64,7 +64,9 @@ import java.util.Map.Entry;
  * @see Collection
  * @since 1.2
  */
-
+/*
+抽象Map，Map的公共部分实现。
+*/
 public abstract class AbstractMap<K,V> implements Map<K,V> {
     /**
      * Sole constructor.  (For invocation by subclass constructors, typically
