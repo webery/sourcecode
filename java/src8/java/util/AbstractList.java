@@ -116,7 +116,7 @@ public abstract class AbstractList<E> extends AbstractCollection<E> implements L
      *
      * @throws IndexOutOfBoundsException {@inheritDoc}
      */
-    abstract public E get(int index);
+    abstract public E get(int index);//获取指定下标的元素
 
     /**
      * {@inheritDoc}
@@ -176,6 +176,7 @@ public abstract class AbstractList<E> extends AbstractCollection<E> implements L
      * @throws ClassCastException   {@inheritDoc}
      * @throws NullPointerException {@inheritDoc}
      */
+	//获取元素o在列表中的下标，o不存在返回-1
     public int indexOf(Object o) {
         ListIterator<E> it = listIterator();
         if (o==null) {
