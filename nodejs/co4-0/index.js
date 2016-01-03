@@ -50,7 +50,6 @@ co.wrap = function (fn) {
  */
 /*
 把一个generator封装成一个Promise执行
-
 */
 function co(gen) {
   var ctx = this;//保存this, co函数依然是使用闭包
@@ -175,12 +174,12 @@ function arrayToPromise(obj) {
 /**
  * Convert an object of "yieldables" to a promise.
  * Uses `Promise.all()` internally.
- * 把普通对象转换成Promise对象
+ * 
  * @param {Object} obj
  * @return {Promise}
  * @api private
  */
-
+//把普通对象转换成Promise对象
 function objectToPromise(obj){
   var results = new obj.constructor();
   var keys = Object.keys(obj);
