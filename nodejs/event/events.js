@@ -2,16 +2,16 @@
 
 
 /**
-Ö»ÓĞEventEmitterÕâ¸öº¯Êı¶ÔÏó
-Ò»°ãÍ¨¹ı¼Ì³ĞEventEmitter,
-ÊµÏÖ×Ô¶¨Òå¶ÔÏó¾ßÓĞ×¢²áºÍ´¥·¢ÊÂ¼şµÄ¹¦ÄÜ
+åªæœ‰EventEmitterè¿™ä¸ªå‡½æ•°å¯¹è±¡
+ä¸€èˆ¬é€šè¿‡ç»§æ‰¿EventEmitter,
+å®ç°è‡ªå®šä¹‰å¯¹è±¡å…·æœ‰æ³¨å†Œå’Œè§¦å‘äº‹ä»¶çš„åŠŸèƒ½
 **/
 
 
-var domain;//Òì²½Òì³£Ïà¹Ø
+var domain;//å¼‚æ­¥å¼‚å¸¸ç›¸å…³
 
 function EventEmitter() {
-  EventEmitter.init.call(this);//³õÊ¼»¯
+  EventEmitter.init.call(this);//åˆå§‹åŒ–
 }
 module.exports = EventEmitter;
 
@@ -21,12 +21,12 @@ EventEmitter.EventEmitter = EventEmitter;
 EventEmitter.usingDomains = false;
 
 EventEmitter.prototype.domain = undefined;
-EventEmitter.prototype._events = undefined;//ÊÂ¼şÈİÆ÷(±£´æËùÓĞµÄ×¢²áÊÂ¼ş)key-value(fn|[fn1,fn2...])
-EventEmitter.prototype._maxListeners = undefined;//Ã¿ÖÖÊÂ¼ş¼àÌıÆ÷×î´ó×¢²áÊıÁ¿
+EventEmitter.prototype._events = undefined;//äº‹ä»¶å®¹å™¨(ä¿å­˜æ‰€æœ‰çš„æ³¨å†Œäº‹ä»¶)key-value(fn|[fn1,fn2...])
+EventEmitter.prototype._maxListeners = undefined;//æ¯ç§äº‹ä»¶ç›‘å¬å™¨æœ€å¤§æ³¨å†Œæ•°é‡
 
 // By default EventEmitters will print a warning if more than 10 listeners are
 // added to it. This is a useful default which helps finding memory leaks.
-EventEmitter.defaultMaxListeners = 10;//Ä¬ÈÏÃ¿ÖÖÊÂ¼ş×î¶àÄÜ×¢²á10¸ö¼àÌı.¿ÉÒÔĞŞ¸Ä.
+EventEmitter.defaultMaxListeners = 10;//é»˜è®¤æ¯ç§äº‹ä»¶æœ€å¤šèƒ½æ³¨å†Œ10ä¸ªç›‘å¬.å¯ä»¥ä¿®æ”¹.
 
 EventEmitter.init = function() {
   this.domain = null;
@@ -48,7 +48,7 @@ EventEmitter.init = function() {
 
 // Obviously not all Emitters should be limited to 10. This function allows
 // that to be increased. Set to zero for unlimited.
-//ÉèÖÃÊÂ¼ş×î´ó¼àÌıÊı
+//è®¾ç½®äº‹ä»¶æœ€å¤§ç›‘å¬æ•°
 EventEmitter.prototype.setMaxListeners = function setMaxListeners(n) {
   if (typeof n !== 'number' || n < 0 || isNaN(n))
     throw new TypeError('n must be a positive number');
@@ -71,8 +71,8 @@ EventEmitter.prototype.getMaxListeners = function getMaxListeners() {
 // arguments and can be deoptimized because of that. These functions always have
 // the same number of arguments and thus do not get deoptimized, so the code
 // inside them can execute faster.
-//emit*Õâ¼¸¸öº¯Êı,ÓÃÀ´´¥·¢ÊÂ¼ş,Ò²¾ÍÊÇµ÷ÓÃ¼àÌıÆ÷º¯Êı.
-//None±íÊ¾,Ã»ÓĞ²ÎÊı; OneÒ»¸ö²ÎÊı,ÒÔ´ËÀàÍÆ.¹Ù·½Ëµ·¨ÊÇÎªÁËĞÔÄÜÓÅ»¯
+//emit*è¿™å‡ ä¸ªå‡½æ•°,ç”¨æ¥è§¦å‘äº‹ä»¶,ä¹Ÿå°±æ˜¯è°ƒç”¨ç›‘å¬å™¨å‡½æ•°.
+//Noneè¡¨ç¤º,æ²¡æœ‰å‚æ•°; Oneä¸€ä¸ªå‚æ•°,ä»¥æ­¤ç±»æ¨.å®˜æ–¹è¯´æ³•æ˜¯ä¸ºäº†æ€§èƒ½ä¼˜åŒ–
 function emitNone(handler, isFn, self) {
   if (isFn)
     handler.call(self);
@@ -105,12 +105,12 @@ function emitTwo(handler, isFn, self, arg1, arg2) {
 }
 function emitThree(handler, isFn, self, arg1, arg2, arg3) {
   if (isFn)
-    handler.call(self, arg1, arg2, arg3);//isFn±íÊ¾Ö»ÓĞÒ»¸ö¼àÌıº¯Êı,Ö±½Ó´¥·¢
-  else {//·ñÔò,¾ÍÊÇÒ»¸ö¼àÌıÆ÷Êı×é,ĞèÒª±éÀú´¥·¢
+    handler.call(self, arg1, arg2, arg3);//isFnè¡¨ç¤ºåªæœ‰ä¸€ä¸ªç›‘å¬å‡½æ•°,ç›´æ¥è§¦å‘
+  else {//å¦åˆ™,å°±æ˜¯ä¸€ä¸ªç›‘å¬å™¨æ•°ç»„,éœ€è¦éå†è§¦å‘
     var len = handler.length;
     var listeners = arrayClone(handler, len);
     for (var i = 0; i < len; ++i)
-      listeners[i].call(self, arg1, arg2, arg3);//×¢Òâ,selfÊÇ´Óemit´«À´µÄ,Ò²¾ÍÊÇthis
+      listeners[i].call(self, arg1, arg2, arg3);//æ³¨æ„,selfæ˜¯ä»emitä¼ æ¥çš„,ä¹Ÿå°±æ˜¯this
   }
 }
 
@@ -124,7 +124,7 @@ function emitMany(handler, isFn, self, args) {
       listeners[i].apply(self, args);
   }
 }
-//´¥·¢ÊÂ¼ş
+//è§¦å‘äº‹ä»¶
 EventEmitter.prototype.emit = function emit(type) {
   var er, handler, len, args, i, events, domain;
   var needDomainExit = false;
@@ -159,7 +159,7 @@ EventEmitter.prototype.emit = function emit(type) {
     return false;
   }
 
-  handler = events[type];//»ñÈ¡typeÀàĞÍµÄËùÓĞ¼àÌıº¯Êı
+  handler = events[type];//è·å–typeç±»å‹çš„æ‰€æœ‰ç›‘å¬å‡½æ•°
 
   if (!handler)
     return false;
@@ -169,7 +169,7 @@ EventEmitter.prototype.emit = function emit(type) {
     needDomainExit = true;
   }
 
-  var isFn = typeof handler === 'function';//µ±Ò»ÖÖtypeÀàĞÍÖ»ÓĞÒ»¸ö¼àÌıÆ÷,ÄÇ¾ÍÊÇÒ»¸öº¯Êı,Èç¹ûÓĞ¶à¸ö,ÄÇ¾ÍÊÇÒ»¸öº¯ÊıÊı×é
+  var isFn = typeof handler === 'function';//å½“ä¸€ç§typeç±»å‹åªæœ‰ä¸€ä¸ªç›‘å¬å™¨,é‚£å°±æ˜¯ä¸€ä¸ªå‡½æ•°,å¦‚æœæœ‰å¤šä¸ª,é‚£å°±æ˜¯ä¸€ä¸ªå‡½æ•°æ•°ç»„
   len = arguments.length;
   switch (len) {
     // fast cases
@@ -199,17 +199,17 @@ EventEmitter.prototype.emit = function emit(type) {
   return true;
 };
 
-//×¢²áÊÂ¼ş
+//æ³¨å†Œäº‹ä»¶
 EventEmitter.prototype.addListener = function addListener(type, listener) {
   var m;
   var events;
   var existing;
 
-  if (typeof listener !== 'function')//¼àÌıÆ÷Ö»ÄÜÊÇº¯Êı
+  if (typeof listener !== 'function')//ç›‘å¬å™¨åªèƒ½æ˜¯å‡½æ•°
     throw new TypeError('listener must be a function');
 
-  events = this._events;//»ñÈ¡ÊÂ¼şÈİÆ÷
-  if (!events) {//Èç¹ûÊÂ¼şÈİÆ÷»¹Ã»ÓĞ³õÊ¼»¯,ÏÈÍê³É³õÊ¼»¯
+  events = this._events;//è·å–äº‹ä»¶å®¹å™¨
+  if (!events) {//å¦‚æœäº‹ä»¶å®¹å™¨è¿˜æ²¡æœ‰åˆå§‹åŒ–,å…ˆå®Œæˆåˆå§‹åŒ–
     events = this._events = {};
     this._eventsCount = 0;
   } else {
@@ -226,15 +226,15 @@ EventEmitter.prototype.addListener = function addListener(type, listener) {
     existing = events[type];
   }
 
-  if (!existing) {//ÅĞ¶Ï¸ÃtypeÀàĞÍÊÂ¼şÊÇ·ñÒÑ¾­´æÔÚÁË¼àÌıÆ÷,Èç¹û²»´æÔÚ,Ö±½Ó×¢²á
+  if (!existing) {//åˆ¤æ–­è¯¥typeç±»å‹äº‹ä»¶æ˜¯å¦å·²ç»å­˜åœ¨äº†ç›‘å¬å™¨,å¦‚æœä¸å­˜åœ¨,ç›´æ¥æ³¨å†Œ
     // Optimize the case of one listener. Don't need the extra array object.
     existing = events[type] = listener;
     ++this._eventsCount;
   } else {
-    if (typeof existing === 'function') {//»òÕß,typeÀàĞÍÖ»ÓĞÒ»¸ö¼àÌıÆ÷,Ò²¾ÍÊÇÖ»ÓĞÒ»¸öº¯Êı,ĞèÒª×ª»»³ÉÊı×é´æ´¢
+    if (typeof existing === 'function') {//æˆ–è€…,typeç±»å‹åªæœ‰ä¸€ä¸ªç›‘å¬å™¨,ä¹Ÿå°±æ˜¯åªæœ‰ä¸€ä¸ªå‡½æ•°,éœ€è¦è½¬æ¢æˆæ•°ç»„å­˜å‚¨
       // Adding the second element, need to change to array.
       existing = events[type] = [existing, listener];
-    } else {//·ñÔò,¾ÍÊÇ2¸ö»òÕßÒÔÉÏµÄ¼àÌıÆ÷,Ò²¾ÍÊÇÒ»¸öÊı×é,ËùÒÔ¿ÉÒÔÖ±½Ó·ÅÈëÊı×éÖĞ
+    } else {//å¦åˆ™,å°±æ˜¯2ä¸ªæˆ–è€…ä»¥ä¸Šçš„ç›‘å¬å™¨,ä¹Ÿå°±æ˜¯ä¸€ä¸ªæ•°ç»„,æ‰€ä»¥å¯ä»¥ç›´æ¥æ”¾å…¥æ•°ç»„ä¸­
       // If we've already got an array, just append.
       existing.push(listener);//
     }
@@ -258,13 +258,13 @@ EventEmitter.prototype.addListener = function addListener(type, listener) {
 
 EventEmitter.prototype.on = EventEmitter.prototype.addListener;
 
-//×¢²áÒ»ÖÖ½ö´¥·¢Ò»´Î¾Í×Ô¶¯ÒÆ³ıµÄÊÂ¼ş
+//æ³¨å†Œä¸€ç§ä»…è§¦å‘ä¸€æ¬¡å°±è‡ªåŠ¨ç§»é™¤çš„äº‹ä»¶
 EventEmitter.prototype.once = function once(type, listener) {
   if (typeof listener !== 'function')
     throw new TypeError('listener must be a function');
 
   var fired = false;
-  //Í¨¹ı°Ñ¼àÌıÊı¾İ·â×°µ½g()º¯ÊıÖĞ,´¥·¢Ö®Ç°ÏÈ°Ñ¸ÃÊÂ¼şÒÆ³ı,È»ºó´¥·¢(Ê¹ÓÃÁË±Õ°ü)
+  //é€šè¿‡æŠŠç›‘å¬æ•°æ®å°è£…åˆ°g()å‡½æ•°ä¸­,è§¦å‘ä¹‹å‰å…ˆæŠŠè¯¥äº‹ä»¶ç§»é™¤,ç„¶åè§¦å‘(ä½¿ç”¨äº†é—­åŒ…)
   function g() {
     this.removeListener(type, g);
 
@@ -281,7 +281,7 @@ EventEmitter.prototype.once = function once(type, listener) {
 };
 
 // emits a 'removeListener' event iff the listener was removed
-//ÒÆ³ıÖ¸¶¨ÀàĞÍÊÂ¼şµÄÖ¸¶¨¼àÌıÆğÆ÷ type:ÊÂ¼şÀàĞÍ; listener:ÊÂ¼ş¼àÌıÆ÷
+//ç§»é™¤æŒ‡å®šç±»å‹äº‹ä»¶çš„æŒ‡å®šç›‘å¬èµ·å™¨ type:äº‹ä»¶ç±»å‹; listener:äº‹ä»¶ç›‘å¬å™¨
 EventEmitter.prototype.removeListener =
     function removeListener(type, listener) {
       var list, events, position, i;
@@ -338,7 +338,7 @@ EventEmitter.prototype.removeListener =
       return this;
     };
 
-//ÒÆ³ıtypeÀàĞÍµÄËùÓĞÊÂ¼ş¼àÌıÆ÷
+//ç§»é™¤typeç±»å‹çš„æ‰€æœ‰äº‹ä»¶ç›‘å¬å™¨
 EventEmitter.prototype.removeAllListeners =
     function removeAllListeners(type) {
       var listeners, events;
@@ -388,7 +388,7 @@ EventEmitter.prototype.removeAllListeners =
 
       return this;
     };
-//»ñÈ¡Ö¸¶¨ÊÂ¼şÀàĞÍµÄËùÓĞ¼àÌıÆ÷
+//è·å–æŒ‡å®šäº‹ä»¶ç±»å‹çš„æ‰€æœ‰ç›‘å¬å™¨
 EventEmitter.prototype.listeners = function listeners(type) {
   var evlistener;
   var ret;
@@ -417,7 +417,7 @@ EventEmitter.listenerCount = function(emitter, type) {
   }
 };
 
-//»ñÈ¡Ö¸¶¨ÀàĞÍÊÂ¼şµÄ×¢²á¼àÌıÆ÷×ÜÊı
+//è·å–æŒ‡å®šç±»å‹äº‹ä»¶çš„æ³¨å†Œç›‘å¬å™¨æ€»æ•°
 EventEmitter.prototype.listenerCount = listenerCount;
 function listenerCount(type) {
   const events = this._events;
@@ -441,7 +441,7 @@ function spliceOne(list, index) {
     list[i] = list[k];
   list.pop();
 }
-//»ñÈ¡Êı×éarr ´Ó 0 µ½ iµÄÔªËØ×é³ÉÒ»¸öĞÂ×ÓÊı×é²¢·µ»Ø.
+//è·å–æ•°ç»„arr ä» 0 åˆ° içš„å…ƒç´ ç»„æˆä¸€ä¸ªæ–°å­æ•°ç»„å¹¶è¿”å›.
 function arrayClone(arr, i) {
   var copy = new Array(i);
   while (i--)

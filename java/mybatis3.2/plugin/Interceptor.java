@@ -1,5 +1,6 @@
 /**
  * @author Clinton Begin
+ * À¹½ØÆ÷½Ó¿Ú
  */
 public interface Interceptor {
 

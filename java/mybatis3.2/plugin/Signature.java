@@ -22,17 +22,15 @@ import java.lang.annotation.Target;
 
 /**
  * @author Clinton Begin
- */
-/**
- * 签名
+ * 签名,定义哪些类，方法，参数需要被拦截
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface Signature {
-  //就是定义哪些类，方法，参数需要被拦截
-  Class<?> type();
+  
+  Class<?> type();//配置被拦截的类
 
-  String method();
+  String method();//配置被拦截的方法名
 
-  Class<?>[] args();
+  Class<?>[] args();//配置满足被拦截方法的参数类型,因为Java中同名函数可以重载
 }

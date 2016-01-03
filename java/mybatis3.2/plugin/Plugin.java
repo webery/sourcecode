@@ -2,6 +2,7 @@
  * @author Clinton Begin
  */
 //Plugin是JDK动态代理类
+//Proxy代理对象.method -> Plugin.invoke -> interceptor.intercept -> Invocation.proceed -> ParameterHandler|ResultSetHandler|StatementHandler|Executor.method 
 public class Plugin implements InvocationHandler {
 
   private Object target;//目标对象(ParameterHandler,ResultSetHandler,StatementHandler,Executor)
