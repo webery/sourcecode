@@ -43,8 +43,8 @@ public abstract class AbstractMessageConverterMethodProcessor extends AbstractMe
 	protected <T> void writeWithMessageConverters(T returnValue, MethodParameter returnType, NativeWebRequest webRequest)
 			throws IOException, HttpMediaTypeNotAcceptableException {
 
-		ServletServerHttpRequest inputMessage = createInputMessage(webRequest);//生成请求报文
-		ServletServerHttpResponse outputMessage = createOutputMessage(webRequest);//生成响应报文
+		ServletServerHttpRequest inputMessage = createInputMessage(webRequest);//转换成请求报文
+		ServletServerHttpResponse outputMessage = createOutputMessage(webRequest);//转换成响应报文
 		writeWithMessageConverters(returnValue, returnType, inputMessage, outputMessage);//刷入数据
 	}
 
@@ -62,7 +62,7 @@ public abstract class AbstractMessageConverterMethodProcessor extends AbstractMe
 	protected <T> void writeWithMessageConverters(T returnValue, MethodParameter returnType,
 			ServletServerHttpRequest inputMessage, ServletServerHttpResponse outputMessage)
 			throws IOException, HttpMediaTypeNotAcceptableException {
-
+		//首先确定响应报文是哪种类型，然后选择响应的MessageConverter刷入数据
 		Class<?> returnValueClass = returnValue.getClass();//取得返回值的Class
 		HttpServletRequest servletRequest = inputMessage.getServletRequest();
 		List<MediaType> requestedMediaTypes = getAcceptableMediaTypes(servletRequest);//请求需要的media类型,在请求头中
@@ -97,8 +97,10 @@ public abstract class AbstractMessageConverterMethodProcessor extends AbstractMe
 
 		if (selectedMediaType != null) {
 			selectedMediaType = selectedMediaType.removeQualityValue();
-			for (HttpMessageConverter<?> messageConverter : this.messageConverters) {//匹配报文转换器
-				if (messageConverter.canWrite(returnValueClass, selectedMediaType)) {//使用报文转换器刷入数据
+			//匹配报文转换器
+			for (HttpMessageConverter<?> messageConverter : this.messageConverters) {
+				if (messageConverter.canWrite(returnValueClass, selectedMediaType)) {
+					//使用报文转换器刷入数据
 					((HttpMessageConverter<T>) messageConverter).write(returnValue, selectedMediaType, outputMessage);
 					if (logger.isDebugEnabled()) {
 						logger.debug("Written [" + returnValue + "] as \"" + selectedMediaType + "\" using [" +

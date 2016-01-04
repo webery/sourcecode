@@ -97,9 +97,10 @@ public class RequestResponseBodyMethodProcessor extends AbstractMessageConverter
 			MethodParameter methodParam,  Type paramType) throws IOException, HttpMediaTypeNotSupportedException {
 
 		final HttpServletRequest servletRequest = webRequest.getNativeRequest(HttpServletRequest.class);
+		//把Servlet的报文转换成SpringMVC报文，以便使用HttpMessageConverter
 		HttpInputMessage inputMessage = new ServletServerHttpRequest(servletRequest);
-		//就是流操作,木有什么好说的,跟文件IO差不错.
-		//1.取得请求报文流
+
+		//获取处理器方法参数的@RequestBody注解
 		RequestBody ann = methodParam.getParameterAnnotation(RequestBody.class);
 		if (!ann.required()) {
 			InputStream inputStream = inputMessage.getBody();
@@ -131,7 +132,7 @@ public class RequestResponseBodyMethodProcessor extends AbstractMessageConverter
 				};
 			}
 		}
-		//从请求报文解析数据
+		//调用父类方法处理
 		return super.readWithMessageConverters(inputMessage, methodParam, paramType);
 	}
 

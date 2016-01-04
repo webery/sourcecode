@@ -70,7 +70,7 @@ public abstract class AbstractMessageConverterMethodArgumentResolver implements 
 	@SuppressWarnings("unchecked")
 	protected <T> Object readWithMessageConverters(HttpInputMessage inputMessage,
 			MethodParameter methodParam, Type targetType) throws IOException, HttpMediaTypeNotSupportedException {
-
+		//首先要获取请求报文的类型，后面会根据这个判断使用哪种MessageConverter
 		MediaType contentType;
 		try {
 			contentType = inputMessage.getHeaders().getContentType();//从请求头取得报文body类型
