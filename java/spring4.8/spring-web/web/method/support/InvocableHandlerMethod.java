@@ -64,7 +64,7 @@ public class InvocableHandlerMethod extends HandlerMethod {
 	 * or the method raised an exception
 	 */
 	public final Object invoke(Message<?> message, Object... providedArgs) throws Exception {
-		Object[] args = getMethodArgumentValues(message, providedArgs);//获取方法参数
+		Object[] args = getMethodArgumentValues(message, providedArgs);//获取所有处理器参数
 		if (logger.isTraceEnabled()) {
 			StringBuilder sb = new StringBuilder("Invoking [");
 			sb.append(getBeanType().getSimpleName()).append(".");

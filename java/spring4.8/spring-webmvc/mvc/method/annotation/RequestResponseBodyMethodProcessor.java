@@ -55,20 +55,20 @@ public class RequestResponseBodyMethodProcessor extends AbstractMessageConverter
 		String name = Conventions.getVariableNameForParameter(parameter);
 		WebDataBinder binder = binderFactory.createBinder(webRequest, argument, name);
 		if (argument != null) {
-			validate(binder, parameter);
+			validate(binder, parameter);//参数校验
 		}
 		mavContainer.addAttribute(BindingResult.MODEL_KEY_PREFIX + name, binder.getBindingResult());
 		return argument;
 	}
 	//数据校验，使用的是注解校验
 	private void validate(WebDataBinder binder, MethodParameter parameter) throws Exception {
-		Annotation[] annotations = parameter.getParameterAnnotations();
+		Annotation[] annotations = parameter.getParameterAnnotations();//获取处理器参数的所有注解
 		for (Annotation ann : annotations) {
-			if (ann.annotationType().getSimpleName().startsWith("Valid")) {
+			if (ann.annotationType().getSimpleName().startsWith("Valid")) {//匹配数据校验注解
 				Object hints = AnnotationUtils.getValue(ann);
-				binder.validate(hints instanceof Object[] ? (Object[]) hints : new Object[] {hints});
+				binder.validate(hints instanceof Object[] ? (Object[]) hints : new Object[] {hints});//执行数据校验
 				BindingResult bindingResult = binder.getBindingResult();
-				if (bindingResult.hasErrors()) {
+				if (bindingResult.hasErrors()) {//必须的字段不存在直接抛出异常，其他异常存起来，方便获取返回前端。
 					if (isBindExceptionRequired(binder, parameter)) {
 						throw new MethodArgumentNotValidException(parameter, bindingResult);
 					}
