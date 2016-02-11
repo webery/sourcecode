@@ -36,8 +36,17 @@ var parseUrl = require('parseurl');
  */
  
  /**
- router: 路由器 每个路由器包含多个中间件封装或路由封装
- route: 路由 每个路由对应一个path, 多个method,多个中间件封装层
+  * 1.
+  * app.route() -> this._router.route()
+  * 2.
+  * app[method] -> this._router.route() ->  -> route[method]()
+  * 3.router
+  * Router[method] -> Route[method]() -> new Route(path) ->
+  * 
+  * 
+  * 
+ router: 路由器 每个路由器包含多个中间件封装或路由封装（）
+ route: 路由 每个路由对应一个path, 多个method,多个中间件封装层（path，stack）
  layer: 
    1.中间件封装，layer存的是path和handler{path, options(sensitive,strict:false,end:false), handler, route}
    2.路由封装，layer存的是route {path,options(sensitive,strict:this.strict,end:true),handler,method}
